@@ -1,0 +1,58 @@
+[colors.bright]
+black = "#5c6773"
+blue = "#a6e1ff"
+cyan = "#93e0e3"
+green = "#cee6ac"
+magenta = "#ffd6da"
+red = "#ff6666"
+white = "#fafafa"
+yellow = "#ffe6b3"
+
+[colors.normal]
+black = "#3f3f3f"
+blue = "#73d0ff"
+cyan = "#95e6cb"
+green = "#bae67e"
+magenta = "#f28779"
+red = "#ff3333"
+white = "#707a8c"
+yellow = "#ffd580"
+
+[colors.primary]
+background = "#1d1f21"
+foreground = "#bfbab0"
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Super"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Super"
+
+[[mouse.bindings]]
+action = "None"
+mouse = "Middle"
+
+[window]
+dynamic_padding = true
+dynamic_title = true
+opacity = 0.95
+title = "Alacritty"
+
+[window.padding]
+x = 5
+y = 5

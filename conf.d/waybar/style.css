@@ -1,0 +1,208 @@
+@define-color bg        #1f2430;
+@define-color bg-alt    #273747;
+@define-color fg        #edf0f5;
+@define-color fg-alt    #70719c;
+@define-color primary   #ffcc66;
+@define-color secondary #ffa759;
+@define-color alert     #ff3333;
+@define-color blue      #7aa6da;
+@define-color green     #b9ca4a;
+
+* {
+   /* `otf-font-awesome` is required to be installed for icons */
+   font-family: Mononoki Nerd Font, NotoSansMono Nerd Font, FontAwesome, Bitstream Vera Sans Roman, Roboto, Helvetica, Arial, sans-serif;
+   font-size: 16pt;
+}
+
+window#waybar {
+   background-color: @bg;
+   color: @fg;
+   transition-property: background-color;
+   transition-duration: .5s;
+}
+
+window#waybar.hidden {
+   opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+   background-color: transparent;
+}
+window#waybar.solo {
+   background-color: #FFFFFF;
+}
+*/
+
+window#waybar.termite {
+   background-color: @bg;
+}
+
+window#waybar.chromium {
+   background-color: @bg;
+   border: none;
+}
+
+button {
+   /* Use box-shadow instead of border so the text isn't offset */
+   box-shadow: inset 0 -3px transparent;
+   /* Avoid rounded borders under each button name */
+   border: none;
+   border-radius: 0;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+button:hover {
+   background: inherit;
+   box-shadow: inset 0 -3px @fg-alt;
+}
+
+#workspaces button {
+   /*        T   R   B   L  */
+   padding: 4px 6px 2px 6px;
+   margin: 0px 2px 0 2px;
+   background-color: transparent;
+   color: @fg-alt;
+}
+
+#workspaces button:hover {
+   background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.focused {
+   color: @fg;
+   background-color: @bg-alt;
+   box-shadow: inset 0 -3px @primary;
+}
+
+#workspaces button.urgent {
+   color: @primary;
+   background-color: @fg-alt;
+}
+
+#workspaces {
+   /*        TB  RL */
+   padding: 0px 2px;
+   margin: 0px 8px;
+}
+
+/* If workspaces is the leftmost module, shorten left margin */
+.modules-left > widget:first-child > #workspaces {
+   margin-left: 4px;
+}
+
+/* If workspaces is the rightmost module, shorten right margin */
+.modules-right > widget:last-child > #workspaces {
+   margin-right: 4px;
+}
+
+#mode {
+   padding: 2px 2px 0 2px;
+   margin: 2px 8px;
+   color: @bg;
+   background-color: @secondary;
+}
+
+#clock {
+   padding: 2px 2px 0 2px;
+   margin: 2px 8px;
+}
+
+#scratchpad {
+   color: @fg-alt;
+   padding: 2px 2px 0 2px;
+   margin: 2px 8px;
+}
+
+#scratchpad.empty {
+	background-color: transparent;
+}
+
+#mpris {
+   padding: 2px 2px 0 2px;
+   margin: 2px 8px;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#pulseaudio {
+   padding: 2px 6px 0 2px;
+   margin: 2px 8px;
+}
+
+#pulseaudio.muted {
+   background-color: @alert;
+   color: @bg;
+   padding: 2px 18px 0 12px;
+   margin: 2px 8px;
+}
+
+#battery {
+   padding: 2px 20px 0 2px;
+   margin: 2px 8px;
+}
+
+#battery.charging, #battery.plugged {
+    color: @green;
+}
+
+#battery.discharging {
+    color: @secondary;
+}
+
+@keyframes blink-battery-alert {
+    to {
+        background-color: @bg;
+        color: @alert;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: @alert;
+    color: @bg;
+    animation-name: blink-battery-alert;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#tray {
+   padding: 2px 2px 0 2px;
+   margin: 2px 4px 2px 2px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @alert;
+}
+
+#bluetooth {
+   color: #0082fc;
+   padding: 2px 8px 0 2px;
+}
+
+#idle_inhibitor {
+   color: @fg-alt;
+   background-color: @bg-alt;
+   padding: 2px 12px 0 2px;
+}
+
+#idle_inhibitor.activated {
+    background-color: @primary;
+    color: @bg;
+}
+
+#keyboard-state > label.locked {
+   padding: 2px 2px 0 2px;
+   margin: 2px 4px 2px 2px;
+   background-color: @alert;
+   color: @bg;
+   font-weight: bold;
+}

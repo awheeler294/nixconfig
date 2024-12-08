@@ -1,0 +1,85 @@
+bindsym $mod+Return exec $term
+
+# Start your launcher
+#bindsym $mod+d exec wofi --show drun --prompt "Apps" --hide-scroll --columns 2 --gtk-dark
+#bindsym $mod+d exec rofi -modi drun -show drun -display-drun "Apps" -line-padding 4 -columns 2 -padding 50 -hidescrollbar -show-icons -drun-icon-theme "Arc-X-D" -font "Noto Sans Regular 11"
+bindsym $mod+d exec bemenu-run
+
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+#set $menu dmenu_path | dmenu | xargs swaymsg exec --
+
+# Steam
+bindsym $mod+F1 exec killall -q steam; while pgrep -x steam >/dev/null; do sleep 1; done; steam-runtime; notify-send 'steam-runtime'; 
+bindsym $mod+Shift+F1 exec notify-send 'steam-native'; steam-native
+
+## browser
+bindsym $mod+F2 exec vivaldi-stable --enable-features=UseOzonePlatform --ozone-platform=wayland
+
+## file manager
+bindsym $mod+F3 exec thunar
+bindsym $mod+Shift+F3 exec gksudo thunar
+
+## restart bar
+bindsym $mod+y exec "killall waybar; waybar"
+
+## screenshots
+#Print 
+#   i3-scrot
+#@super + Print
+#   i3-scrot -w
+#@super + shift + Print
+#   i3-scrot -s
+#
+## xkill
+#@super + ctrl + x
+#   xkill
+#
+## type a shrug
+#@super + u
+#   xdotool type --clearmodifiers --delay 15 '¯\_(ツ)_/¯'
+#
+#@super + shift + u 
+#   xdotool type --clearmodifiers --delay 15 '¯\\\_(ツ)_/¯'
+#
+## select autorandr profile
+#super + o
+#   autorandr | rofi -dmenu -p "autorandr" | cut -d ' ' -f 1 | xargs --no-run-if-empty autorandr --change --force
+#
+## force autorandr
+#super + shift + o
+#   notify-send 'force autorandr'; autorandr --change --force
+#
+## restart polybar
+#super + y
+#   notify-send 'restart polybar'; $HOME/.config/polybar/launch.sh
+#
+## audio control panel
+#super + ctrl + m
+#   pavucontrol
+#
+## Media Controls
+#XF86AudioPlay
+#   ~/bin/mediactl play
+#XF86AudioPrev 
+#   ~/bin/mediactl previous
+#XF86AudioNext 
+#   ~/bin/mediactl next
+#super + p 
+#   ~/bin/mediactl launch
+#super + shift + p 
+#   ~/bin/mediactl quit
+#
+## Headset Battery
+#super + shift + h
+#   notify-send "$(headsetcontrol -b | (read _ name; echo $name))" "$(headsetcontrol -b | grep Battery)"
+#
+## lock screen
+#super + l
+#   xset s activate
+#
+## Turn off screen immediately
+#super + shift + l
+#   sleep 1; xset dpms force off
+#

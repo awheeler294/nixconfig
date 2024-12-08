@@ -1,0 +1,71 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+command_timeout = 1000
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+# Use custom format
+# format = """
+# [┌───────────────────>](bold green)
+# [│](bold green)$directory$rust$package
+# [└─>](bold green) """
+# format="$time"
+
+format = """
+$time$directory$localip$nix_shell$shlvl
+($git_branch $git_status)
+$character
+"""
+[time]
+   disabled = false
+   format = '[\[ $time \]]($style) '
+   time_format = "%T"
+   style = "yellow"
+
+[directory]
+   truncation_length = 8
+   truncation_symbol = "…/"
+   style = "bold green"
+
+[localip]
+   ssh_only = true
+   format = '@[$localipv4](bold yellow) '
+   disabled = false
+
+# [nix_shell]
+#    disabled = false
+#    impure_msg = ''
+#    style= 'blue'
+#    symbol = '❄'
+#    format = '[$symbol$state]($style) '
+
+[nix_shell]
+   disabled = false
+   impure_msg = '[impure shell](bold red)'
+   pure_msg = '[pure shell](bold green)'
+   unknown_msg = '[unknown shell](bold yellow)'
+   symbol = '[❄](bold blue)'
+   format = '$symbol [$state( \($name\))](bold blue) '
+
+[shlvl]
+   disabled = false
+   format = '[$symbol](bold blue)'
+   repeat = true
+   symbol = ''
+   repeat_offset = 0
+   threshold = 2
+
+
+[git_branch]
+   symbol = "  "
+   truncation_length = 70
+   truncation_symbol = "…"
+   format = "[$symbol$branch(:$remote_branch)]($style) "
+   style = "blue"
+
+[character]
+   success_symbol = "[❯❯](bold cyan)[❯](bold green)"
+   error_symbol = "[✗](bold red)[❯❯](bold purple)"
+

@@ -1,0 +1,10 @@
+exec dbus-sway-environment
+exec configure-gtk
+exec_always import-gtk-settings.sh
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+exec nm-applet
+# exec_always swww_random.sh /home/andrew/Pictures/wallpapers/169/ eDP-1
+# exec_always swww_random.sh /home/andrew/Pictures/wallpapers/ultrawide DP-1
+
+# exec swww init && swww img -o eDP-1 "/home/andrew/Pictures/wallpapers/waneella/horizontal/Cell_5000x3000.png" && swww img -o DP-1 /home/andrew/Pictures/wallpapers/animated/pRKkeKRqx0_540x960_patreon_heade_02r.gif

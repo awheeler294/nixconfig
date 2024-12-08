@@ -1,0 +1,84 @@
+[
+   {
+      "output": "eDP-1",
+      
+      // Waybar at top layer
+      "layer": "top",
+
+      // Waybar position (top|bottom|left|right)
+      "position": "bottom",
+
+      // Waybar height (to be removed for auto height)
+      // "height": 32,
+      
+      // Waybar width
+      // "width": 1920,
+      
+      // Gaps between modules (4px)
+      "spacing": 4,
+
+      "include": [
+         "~/.config/waybar/modules.jsonc"
+      ],
+
+      // Choose the order of the modules
+      "modules-left": ["sway/workspaces", "sway/scratchpad", "keyboard-state", "sway/window", "sway/mode"],
+
+      "modules-center": ["clock"],
+
+      "modules-right": ["pulseaudio", "battery", "tray", "bluetooth", "idle_inhibitor"],
+
+      // Modules configuration
+      // "sway/workspaces": {
+      //     "disable-scroll": true,
+      //     "all-outputs": true,
+      //     "warp-on-scroll": false,
+      //     "format": "{name}: {icon}",
+      //     "format-icons": {
+      //         "1": "",
+      //         "2": "",
+      //         "3": "",
+      //         "4": "",
+      //         "5": "",
+      //         "urgent": "",
+      //         "focused": "",
+      //         "default": ""
+      //     }
+      // },
+   },
+
+   {
+      "output": [
+         "LG Electronics LG HDR WQHD 0x00009626",
+         "LG Electronics LG HDR WQHD 0x00069026",
+         "DP-1"
+         ],
+      
+      // Waybar at top layer
+      "layer": "top",
+
+      // Waybar position (top|bottom|left|right)
+      "position": "bottom",
+
+      // Waybar height (to be removed for auto height)
+      // "height": 32,
+      
+      // Waybar width
+      // "width": 1920,
+      
+      // Gaps between modules (4px)
+      "spacing": 4,
+
+      "include": [
+         "~/.config/waybar/modules.jsonc"
+      ],
+      
+      // Choose the order of the modules
+      "modules-left": ["sway/workspaces", "sway/scratchpad", "keyboard-state", "sway/window", "sway/mode"],
+
+      "modules-center": ["mpris"],
+
+      "modules-right": ["clock", "pulseaudio", "battery", "tray", "bluetooth", "idle_inhibitor"]
+
+   }
+]

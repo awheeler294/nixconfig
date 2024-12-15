@@ -7,7 +7,7 @@
 {
   imports =
     [
-      modules/sway.nix
+      ../modules/sway.nix
 
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -45,13 +45,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the XFCE Desktop Environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.xfce.enable = true;
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -84,9 +77,16 @@
   users.users.andrew = {
     isNormalUser = true;
     description = "andrew";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "storage" "disk" "video" "docker" ];
     packages = with pkgs; [
     #  thunderbird
+    ];
+    openssh.authorizedKeys.keys = [
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDL/+YvaXuscTQBocwWcSn0ZBRGZ20B2TdUzYgFqiqXy5LXXF2v193UGk0WUXW0jHLxuU5FqFbf9gVrQShyp6LzzGkZRYD/blMtCcYMS0zkFVl86imtA898nrqlr6X/+MhZc7gw+TMgfogkttriytyfbWkTnDXAthVEXtpdkXcvLH3Z8mK5Me5zMMrt4I9JvgolNGTqWkkpzpVYWjLjH+RXOcrgkYG3ptD2tvmI+4TEzXl8T+OrQsandjzjIKD3o+vIn616qVFncyvTBZdcQQ3XAMCB+234tpQOaq98LeJTe6xOCEyur/ZwlFkyAibcEAS4IIPLvou5wZAUXq0bE+l/Jp8uv3GBw7IiR7edHrywZLdP4UNAS3KnJ8tkHtfHzX3haQz5NrRbuTeTwAiB64K0GrzKHzG39KDkYvJX0cK//AevEXUKAnsK2gSt7GGIp3D5okhnin+1nQdY0QDIVvllb8NA2ghO0Qxpcf/DB2vODey0hngvHgCUWicItyyxxU="
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC89HhgaHv/jMfx9J6CRY6DWE/6L2v4W9CEa3PLGHXGUAYif2bF1XUrI+c6wGgsuHvPNxUAf8bdYEJirHcD3/cy3p2TUNS0V4Hx6sm4odTBYnbE9N31Jd5OBXojFALf5yRgennx1G07uoHI2ww8SF9Dzcy3dUJ4N6HNdq+X47hxp4HoD+3ZOOcOWyKEuVjuNaUMSTvjQWP+f4/NUVOW+tP1wpnXcdFCSCxb8IcJaA5HKd/gbWK/CqJvQYIpNbXd0ocdzaNzGXk0RbfLaRZ3yzwMfWM+Nb3WO7hwiFnyw5XIsjPvxb2tw+NAftkzAE6DJ2PnnETAE9PNZGulL7452cvgONszbxWKK40otQ+AhgVFisRzJ7IDiTKPsbA0BYfxYzkQUmQ3t/Q39Q2IlBQAh2BPqhPBv/wV9wvXBVdJL2ohCYScH9kHeM0dapo9eFTDGMNYD+VU59O+csCJgNcn/PSXL0k0/ZDLp+MYFlS7UXKgEZSu8jdKei0DQ43nrz7lXxE="
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDsHRP09y93tYaK2izli1LkSkEtt6Gpgo2/WZo3aduNgz6VlncoF5MCvEdN3Tp/novZ+D8E0NVNMVntOKbzdVizkj7IL6WVHyjxOZvZXSL2jG+HvC60Y1ek0oFVGRR0RiZkV6aUn56nxrQAMhw8EO8Rgc9aGyaLPJ6ZiFk4q5y7YE4n19PFVMtuzKuK3iO09+ID81iTgH53PF3+RQ9VB7N4s9G1Xxt/UzR1h4iqdTDWWiColMqbqxTvijwwmjXD3fiB8Jd6NzEO7UFtU0o8Dlb5ooXW08mP1P0ssH1T7IBKXEI6E9irIIQZ7Fv3WnG5jcmZ3UV2t4mzcCTtIUS0HOYqXBOhSE47Pg5CDLuR1Z2NKH8Qeo9wzUU1gKT4PTxqrSpDoFHU33GdaJGHrN+dIp5AIsH+DiDMP6lIB84M+gnESGyfHmt6SGNXNRUtaW/lTVLcN1hN9tKJwXn3+wIBPbvJV1/w2IRrvNtlJIKDV+RKNGacHoopLb5pCxCutD25lhE="
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDchBqOb+/l3eI6hGOQgYIYlhaRlmFptkS2wUq8AyQ8e"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJTvC8zbRAPQqKzrgtrPU/pjpDa3cYEu6gGg1qo8A6gb"
     ];
   };
 
@@ -104,9 +104,13 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     alacritty
+    btop
+    curl
     docker-compose
     e2fsprogs # badblocks
     eza
+    fd
+    gcc
     git
     htop
     hddtemp
@@ -120,9 +124,11 @@
     neovim
     nmap
     nvme-cli
+    python3
     sanoid
     smartmontools
     snapraid
+    # snapraid-runner
     sway
     tdns-cli
     tmux
@@ -147,13 +153,85 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.PermitRootLogin = "no";
+  };
+
+  services.snapraid = {
+    enable = true;
+    sync.interval = "";
+    scrub.interval = "";
+    contentFiles = [
+      "/var/snapraid.content"
+      "/mnt/disk1/snapraid.content"
+      "/mnt/disk2/snapraid.content"
+    ];
+    dataDisks = {
+      d1 = "/mnt/disk1/";
+      d2 = "/mnt/disk2/";
+      #d3 = "/mnt/disk3/";
+      #d4 = "/mnt/disk4/";
+    };
+    parityFiles = [
+      "/mnt/parity1/snapraid.parity"
+    ];
+    exclude = [
+      "*.unrecoverable"
+      "/tmp/"
+      "/lost+found/"
+      "*.!sync"
+      "/.snapshots/"
+    ];
+  };
+
+  systemd.services."snapraid-runner" = {
+    script = ''
+      set -eu
+      ${pkgs.python3}/bin/python3 /opt/snapraid-runner/snapraid-runner.py -c /root/snapraid-runner.conf
+    '';
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+  };
+
+  systemd.timers."snapraid-runner" = {
+  wantedBy = [ "timers.target" ];
+    timerConfig = {
+      # Daily at 4am
+      OnCalendar = "*-*-* 04:00:00";
+      Unit = "snapraid-runner.service";
+    };
+  };
+
+  virtualisation = {
+    docker = {
+      enable = true;
+      autoPrune = {
+        enable = true;
+        dates = "weekly";
+      };
+    };
+  };
+
+  systemd.services.start-docker-compose = {
+    script = ''
+      ${pkgs.docker-compose}/bin/docker-compose -f /opt/docker-compose.yml up -d
+    '';
+    wantedBy = ["multi-user.target"];
+    # If you use podman
+    # after = ["podman.service" "podman.socket"];
+    # If you use docker
+    after = ["docker.service" "docker.socket"];
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

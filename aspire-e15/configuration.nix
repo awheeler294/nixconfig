@@ -7,7 +7,7 @@
 {
   imports =
     [ 
-      modules/sway.nix
+      ../modules/sway.nix
       
       # Include the results of the hardware scan.
       ./hardware-configuration.nix

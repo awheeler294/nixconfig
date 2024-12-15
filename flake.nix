@@ -29,7 +29,7 @@
     };
 
     # helix editor, use the master branch
-    helix.url = "github:helix-editor/helix/master"; 
+    helix.url = "github:helix-editor/helix/master";
 
     nvim-kickstart = {
       url = "github:awheeler294/kickstart.nvim";
@@ -38,7 +38,24 @@
 
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: let
+    inherit (self) outputs;
+    # Supported systems for your flake packages, shell, etc.
+    systems = [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+    # This is a function that generates an attribute by calling a function you
+    # pass to it, with each system as an argument
+    forAllSystems = nixpkgs.lib.genAttrs systems;
+  in {
+    # Custom packages
+    # Accessible through 'nix build', 'nix shell', etc
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+
     # Please replace my-nixos with your hostname
     nixosConfigurations.aspire-e15-nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -46,7 +63,7 @@
       modules = [
         # Import the previous configuration.nix we used,
         # so the old configuration file still takes effect
-        ./laptop-configuration.nix
+        ./aspire-e15/configuration.nix
 
 	# make home-manager as a module of nixos
         # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
@@ -70,7 +87,7 @@
       modules = [
         # Import the previous configuration.nix we used,
         # so the old configuration file still takes effect
-        ./vaulty-server-configuration.nix
+        ./vaulty-server/configuration.nix
 
 	# make home-manager as a module of nixos
         # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`

@@ -18,18 +18,39 @@
       fsType = "ext4";
     };
 
+  # 20TB sda1
   fileSystems."/mnt/parity1" =
-    { device = "/dev/disk/by-uuid/99d68a19-51e1-484a-8ea8-5f02a81ab03f";
+    { device = "/dev/disk/by-uuid/36d37206-71af-4120-be2e-46276540b30b";
       fsType = "ext4";
     };
 
+  # # 4TB sdf1
+  # fileSystems."/mnt/decomission" =
+  #   { device = "/dev/disk/by-uuid/84c18c12-d9fd-4027-8ab2-331ce2ad3b9d";
+  #     fsType = "ext4";
+  #   };
+
+  # 6TB sdc1
   fileSystems."/mnt/disk1" =
     { device = "/dev/disk/by-uuid/35e1d0cd-f154-4ef0-aa7a-2cdc266ceb5b";
       fsType = "ext4";
     };
 
+  # 20TB sdb1
   fileSystems."/mnt/disk2" =
-    { device = "/dev/disk/by-uuid/84c18c12-d9fd-4027-8ab2-331ce2ad3b9d";
+    { device = "/dev/disk/by-uuid/78233109-8e72-45de-9169-917faf58cfc1";
+      fsType = "ext4";
+    };
+
+  #  6TB sde1
+  fileSystems."/mnt/disk3" =
+    { device = "/dev/disk/by-uuid/99d68a19-51e1-484a-8ea8-5f02a81ab03f";
+      fsType = "ext4";
+    };
+
+  #  20TB sdd1
+  fileSystems."/mnt/disk4" =
+    { device = "/dev/disk/by-uuid/68c9f2c1-ce4a-4dbc-bbb6-0ad1af068342";
       fsType = "ext4";
     };
 

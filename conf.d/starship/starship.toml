@@ -14,7 +14,7 @@ add_newline = true
 # format="$time"
 
 format = """
-$time$directory$localip$nix_shell$shlvl
+$time$directory$username$localip$nix_shell$shlvl
 ($git_branch $git_status)
 $character
 """
@@ -28,6 +28,14 @@ $character
    truncation_length = 8
    truncation_symbol = "…/"
    style = "bold green"
+
+[username]
+   style_user = 'yellow bold'
+   style_root = 'red bold'
+   format = '[$user]($style)'
+   disabled = false
+   show_always = false
+   aliases = {}
 
 [localip]
    ssh_only = true

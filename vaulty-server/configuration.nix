@@ -87,6 +87,7 @@
       "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDsHRP09y93tYaK2izli1LkSkEtt6Gpgo2/WZo3aduNgz6VlncoF5MCvEdN3Tp/novZ+D8E0NVNMVntOKbzdVizkj7IL6WVHyjxOZvZXSL2jG+HvC60Y1ek0oFVGRR0RiZkV6aUn56nxrQAMhw8EO8Rgc9aGyaLPJ6ZiFk4q5y7YE4n19PFVMtuzKuK3iO09+ID81iTgH53PF3+RQ9VB7N4s9G1Xxt/UzR1h4iqdTDWWiColMqbqxTvijwwmjXD3fiB8Jd6NzEO7UFtU0o8Dlb5ooXW08mP1P0ssH1T7IBKXEI6E9irIIQZ7Fv3WnG5jcmZ3UV2t4mzcCTtIUS0HOYqXBOhSE47Pg5CDLuR1Z2NKH8Qeo9wzUU1gKT4PTxqrSpDoFHU33GdaJGHrN+dIp5AIsH+DiDMP6lIB84M+gnESGyfHmt6SGNXNRUtaW/lTVLcN1hN9tKJwXn3+wIBPbvJV1/w2IRrvNtlJIKDV+RKNGacHoopLb5pCxCutD25lhE="
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDchBqOb+/l3eI6hGOQgYIYlhaRlmFptkS2wUq8AyQ8e"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJTvC8zbRAPQqKzrgtrPU/pjpDa3cYEu6gGg1qo8A6gb"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3zhxrXqDdLFcBZiX3zje257i6w3NJnRyPgHyEIhKMh andrew@proxy-server"
     ];
   };
 
@@ -106,15 +107,19 @@
     alacritty
     btop
     curl
+    ddrescue
     docker-compose
     e2fsprogs # badblocks
     eza
     fd
     gcc
     git
+    gnumake
+    gptfdisk
     htop
     hddtemp
     intel-gpu-tools
+    inxi
     iotop
     jq
     lm_sensors
@@ -135,6 +140,7 @@
     tree
     vim
     wget
+    wireguard-tools
     zsh
   ];
 
@@ -167,12 +173,14 @@
       "/var/snapraid.content"
       "/mnt/disk1/snapraid.content"
       "/mnt/disk2/snapraid.content"
+      "/mnt/disk3/snapraid.content"
+      "/mnt/disk4/snapraid.content"
     ];
     dataDisks = {
       d1 = "/mnt/disk1/";
       d2 = "/mnt/disk2/";
-      #d3 = "/mnt/disk3/";
-      #d4 = "/mnt/disk4/";
+      d3 = "/mnt/disk3/";
+      d4 = "/mnt/disk4/";
     };
     parityFiles = [
       "/mnt/parity1/snapraid.parity"
@@ -232,6 +240,56 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   networking.firewall.enable = false;
+
+  ###
+  # Wireguard Setup
+  ###
+  networking.firewall = {
+    allowedUDPPorts = [ 51820 ]; # Clients and peers can use the same port, see listenport
+  };
+  # Enable WireGuard
+  networking.wireguard.enable = true;
+  networking.wireguard.interfaces = let
+    proxy_server_public_key = "MmqD60klDC+ZBEOfIUCTgsaHctLVKw+9TWuP3WIc5Fk=";
+  in {
+    # "wg0" is the network interface name. You can name the interface arbitrarily.
+    wg0 = {
+      # Determines the IP address and subnet of the client's end of the tunnel interface.
+      ips = [ "10.100.0.2/24" ];
+      listenPort = 51820; # to match firewall allowedUDPPorts (without this wg uses random port numbers)
+
+      # Path to the private key file.
+      #
+      # Note: The private key can also be included inline via the privateKey option,
+      # but this makes the private key world-readable; thus, using privateKeyFile is
+      # recommended.
+      privateKeyFile = "/root/wireguard-keys/private";
+      postSetup = ''
+        wg set wg0 peer ${proxy_server_public_key } persistent-keepalive 25
+      '';
+
+      peers = [
+        # For a client configuration, one peer entry for the server will suffice.
+
+        {
+          # Public key of the server (not a file path).
+          publicKey = proxy_server_public_key;
+
+          # Forward all the traffic via VPN.
+          # allowedIPs = [ "0.0.0.0/0" ];
+          # Or forward only particular subnets
+          #allowedIPs = [ "10.100.0.1" "91.108.12.0/22" ];
+          allowedIPs = [ "10.100.0.0/24" ];
+
+          # Set this to the server IP and port.
+          endpoint = "45.32.229.198:51820"; # ToDo: route to endpoint not automatically configured https://wiki.archlinux.org/index.php/WireGuard#Loop_routing https://discourse.nixos.org/t/solved-minimal-firewall-setup-for-wireguard-client/7577
+
+          # Send keepalives every 25 seconds. Important to keep NAT tables alive.
+          persistentKeepalive = 25;
+        }
+      ];
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -48,7 +48,7 @@ in
     dbus-sway-environment
     dracula-theme # gtk theme
     glib # gsettings
-    gnome3.adwaita-icon-theme  # default gnome cursors
+    adwaita-icon-theme  # default gnome cursors
     grim # screenshot functionality
     gruvbox-gtk-theme
     mako # notification system developed by swaywm maintainer

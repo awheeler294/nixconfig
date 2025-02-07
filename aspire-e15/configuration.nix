@@ -5,13 +5,13 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
-  imports =
-    [ 
-      ../modules/sway.nix
-      
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ 
+    ../modules/sway.nix
+    ../modules/kiduser.nix
+    
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.grub = {
@@ -75,7 +75,6 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -99,18 +98,15 @@
     isNormalUser = true;
     description = "Andrew";
     extraGroups = [ "networkmanager" "video" "wheel" ];
-    packages = with pkgs; [
-      firefox
-      neovim
-    #  thunderbird
-    ];
+    shell = pkgs.zsh;
+    # packages = with pkgs; [
+    #   firefox
+    #   neovim
+    #   thunderbird
+    # ];
   };
 
   security.polkit.enable = true;
-
-  # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "andrew";
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -147,12 +143,15 @@
     # Here, the helix package is installed from the helix input data source
     inputs.helix.packages."${pkgs.system}".helix
     minetest
+    firefox
   ];
 
   # Set default editor
   environment.variables.EDITOR = "nvim";
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  environment.pathsToLink = [ "/share/zsh" ];
 
   # Perform garbage collection weekly to maintain low disk usage
   nix.gc = {
@@ -175,6 +174,8 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
+  programs.zsh.enable = true;
 
   # List services that you want to enable:
 

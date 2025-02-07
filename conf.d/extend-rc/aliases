@@ -1,0 +1,66 @@
+#!/bin/bash
+
+alias cp="cp -i"       # Confirm before overwriting something            
+alias df='df -h'       # Human-readable sizes
+alias free='free -m'   # Show sizes in MB
+alias grep='grep -i'   # Case insensitive
+alias ssh='TERM=xterm-256color ssh'
+
+alias urldecode="python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
+alias urlencode="python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+
+steam-id() {
+   grep -n "name" ~/.steam/steam/steamapps/*.acf | sed -e 's/^.*_//;s/\.acf:.:/ /;s/name//;s/"//g;s/\t//g;s/ /-/' | awk -F"-" '{printf "%-40s %s\n", $2, $1}' | sort
+}
+#echo "aliases"
+if hash eza 2>/dev/null; then
+
+   #echo "found eza"
+   # use eza for ls and tree
+   alias ls='eza --icons'
+   alias ll='eza --icons -lha'
+   alias tree='eza --icons --tree'
+
+else
+
+   echo "eza not found"
+
+   if hash grc 2>/dev/null; then
+      
+      echo "using grc"
+
+      alias ls='grc ls'
+      alias ll='grc ls -lha'
+      alias ll='grc tree -lhaR'
+      alias slog='grc sudo tail -f /var/log/syslog'
+
+   elif [ -x /usr/bin/dircolors ]; then
+   
+      echo "using dircolors"
+      # enable color support of ls and also add handy aliases
+      test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+      alias ls='ls --color=auto'
+      alias ll='ls -lhaF --color=auto'
+      alias ll='tree -lhaRF --color=auto'
+      alias ll='ls -alhF --color=auto'
+
+      #alias dir='dir --color=auto'
+      #alias vdir='vdir --color=auto'
+
+      alias grep='grep --color=auto'
+      alias fgrep='fgrep --color=auto'
+      alias egrep='egrep --color=auto'
+   fi
+
+   # some more ls aliases
+   #alias la='ls -A'
+   #alias l='ls -CF'
+fi
+
+if hash nvim 2>/dev/null; then
+   alias nv='nvim'
+   alias vin='NVIM_APPNAME=nvim-kickstart nvim'
+else
+   echo "nvim not found"
+fi
+

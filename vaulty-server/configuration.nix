@@ -73,22 +73,36 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # Define storage group
+  users.groups.storage = {
+    gid = 1001;
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.andrew = {
-    isNormalUser = true;
-    description = "andrew";
-    extraGroups = [ "networkmanager" "wheel" "storage" "disk" "video" "docker" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
-    openssh.authorizedKeys.keys = [
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDL/+YvaXuscTQBocwWcSn0ZBRGZ20B2TdUzYgFqiqXy5LXXF2v193UGk0WUXW0jHLxuU5FqFbf9gVrQShyp6LzzGkZRYD/blMtCcYMS0zkFVl86imtA898nrqlr6X/+MhZc7gw+TMgfogkttriytyfbWkTnDXAthVEXtpdkXcvLH3Z8mK5Me5zMMrt4I9JvgolNGTqWkkpzpVYWjLjH+RXOcrgkYG3ptD2tvmI+4TEzXl8T+OrQsandjzjIKD3o+vIn616qVFncyvTBZdcQQ3XAMCB+234tpQOaq98LeJTe6xOCEyur/ZwlFkyAibcEAS4IIPLvou5wZAUXq0bE+l/Jp8uv3GBw7IiR7edHrywZLdP4UNAS3KnJ8tkHtfHzX3haQz5NrRbuTeTwAiB64K0GrzKHzG39KDkYvJX0cK//AevEXUKAnsK2gSt7GGIp3D5okhnin+1nQdY0QDIVvllb8NA2ghO0Qxpcf/DB2vODey0hngvHgCUWicItyyxxU="
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC89HhgaHv/jMfx9J6CRY6DWE/6L2v4W9CEa3PLGHXGUAYif2bF1XUrI+c6wGgsuHvPNxUAf8bdYEJirHcD3/cy3p2TUNS0V4Hx6sm4odTBYnbE9N31Jd5OBXojFALf5yRgennx1G07uoHI2ww8SF9Dzcy3dUJ4N6HNdq+X47hxp4HoD+3ZOOcOWyKEuVjuNaUMSTvjQWP+f4/NUVOW+tP1wpnXcdFCSCxb8IcJaA5HKd/gbWK/CqJvQYIpNbXd0ocdzaNzGXk0RbfLaRZ3yzwMfWM+Nb3WO7hwiFnyw5XIsjPvxb2tw+NAftkzAE6DJ2PnnETAE9PNZGulL7452cvgONszbxWKK40otQ+AhgVFisRzJ7IDiTKPsbA0BYfxYzkQUmQ3t/Q39Q2IlBQAh2BPqhPBv/wV9wvXBVdJL2ohCYScH9kHeM0dapo9eFTDGMNYD+VU59O+csCJgNcn/PSXL0k0/ZDLp+MYFlS7UXKgEZSu8jdKei0DQ43nrz7lXxE="
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDsHRP09y93tYaK2izli1LkSkEtt6Gpgo2/WZo3aduNgz6VlncoF5MCvEdN3Tp/novZ+D8E0NVNMVntOKbzdVizkj7IL6WVHyjxOZvZXSL2jG+HvC60Y1ek0oFVGRR0RiZkV6aUn56nxrQAMhw8EO8Rgc9aGyaLPJ6ZiFk4q5y7YE4n19PFVMtuzKuK3iO09+ID81iTgH53PF3+RQ9VB7N4s9G1Xxt/UzR1h4iqdTDWWiColMqbqxTvijwwmjXD3fiB8Jd6NzEO7UFtU0o8Dlb5ooXW08mP1P0ssH1T7IBKXEI6E9irIIQZ7Fv3WnG5jcmZ3UV2t4mzcCTtIUS0HOYqXBOhSE47Pg5CDLuR1Z2NKH8Qeo9wzUU1gKT4PTxqrSpDoFHU33GdaJGHrN+dIp5AIsH+DiDMP6lIB84M+gnESGyfHmt6SGNXNRUtaW/lTVLcN1hN9tKJwXn3+wIBPbvJV1/w2IRrvNtlJIKDV+RKNGacHoopLb5pCxCutD25lhE="
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDchBqOb+/l3eI6hGOQgYIYlhaRlmFptkS2wUq8AyQ8e"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJTvC8zbRAPQqKzrgtrPU/pjpDa3cYEu6gGg1qo8A6gb"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3zhxrXqDdLFcBZiX3zje257i6w3NJnRyPgHyEIhKMh andrew@proxy-server"
-    ];
+  users.users = {
+    
+    andrew = {
+      isNormalUser = true;
+      description = "andrew";
+      extraGroups = [ "networkmanager" "wheel" "storage" "disk" "video" "docker" ];
+      packages = with pkgs; [
+      #  thunderbird
+      ];
+      openssh.authorizedKeys.keys = [
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDDL/+YvaXuscTQBocwWcSn0ZBRGZ20B2TdUzYgFqiqXy5LXXF2v193UGk0WUXW0jHLxuU5FqFbf9gVrQShyp6LzzGkZRYD/blMtCcYMS0zkFVl86imtA898nrqlr6X/+MhZc7gw+TMgfogkttriytyfbWkTnDXAthVEXtpdkXcvLH3Z8mK5Me5zMMrt4I9JvgolNGTqWkkpzpVYWjLjH+RXOcrgkYG3ptD2tvmI+4TEzXl8T+OrQsandjzjIKD3o+vIn616qVFncyvTBZdcQQ3XAMCB+234tpQOaq98LeJTe6xOCEyur/ZwlFkyAibcEAS4IIPLvou5wZAUXq0bE+l/Jp8uv3GBw7IiR7edHrywZLdP4UNAS3KnJ8tkHtfHzX3haQz5NrRbuTeTwAiB64K0GrzKHzG39KDkYvJX0cK//AevEXUKAnsK2gSt7GGIp3D5okhnin+1nQdY0QDIVvllb8NA2ghO0Qxpcf/DB2vODey0hngvHgCUWicItyyxxU="
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC89HhgaHv/jMfx9J6CRY6DWE/6L2v4W9CEa3PLGHXGUAYif2bF1XUrI+c6wGgsuHvPNxUAf8bdYEJirHcD3/cy3p2TUNS0V4Hx6sm4odTBYnbE9N31Jd5OBXojFALf5yRgennx1G07uoHI2ww8SF9Dzcy3dUJ4N6HNdq+X47hxp4HoD+3ZOOcOWyKEuVjuNaUMSTvjQWP+f4/NUVOW+tP1wpnXcdFCSCxb8IcJaA5HKd/gbWK/CqJvQYIpNbXd0ocdzaNzGXk0RbfLaRZ3yzwMfWM+Nb3WO7hwiFnyw5XIsjPvxb2tw+NAftkzAE6DJ2PnnETAE9PNZGulL7452cvgONszbxWKK40otQ+AhgVFisRzJ7IDiTKPsbA0BYfxYzkQUmQ3t/Q39Q2IlBQAh2BPqhPBv/wV9wvXBVdJL2ohCYScH9kHeM0dapo9eFTDGMNYD+VU59O+csCJgNcn/PSXL0k0/ZDLp+MYFlS7UXKgEZSu8jdKei0DQ43nrz7lXxE="
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDsHRP09y93tYaK2izli1LkSkEtt6Gpgo2/WZo3aduNgz6VlncoF5MCvEdN3Tp/novZ+D8E0NVNMVntOKbzdVizkj7IL6WVHyjxOZvZXSL2jG+HvC60Y1ek0oFVGRR0RiZkV6aUn56nxrQAMhw8EO8Rgc9aGyaLPJ6ZiFk4q5y7YE4n19PFVMtuzKuK3iO09+ID81iTgH53PF3+RQ9VB7N4s9G1Xxt/UzR1h4iqdTDWWiColMqbqxTvijwwmjXD3fiB8Jd6NzEO7UFtU0o8Dlb5ooXW08mP1P0ssH1T7IBKXEI6E9irIIQZ7Fv3WnG5jcmZ3UV2t4mzcCTtIUS0HOYqXBOhSE47Pg5CDLuR1Z2NKH8Qeo9wzUU1gKT4PTxqrSpDoFHU33GdaJGHrN+dIp5AIsH+DiDMP6lIB84M+gnESGyfHmt6SGNXNRUtaW/lTVLcN1hN9tKJwXn3+wIBPbvJV1/w2IRrvNtlJIKDV+RKNGacHoopLb5pCxCutD25lhE="
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDchBqOb+/l3eI6hGOQgYIYlhaRlmFptkS2wUq8AyQ8e"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJTvC8zbRAPQqKzrgtrPU/pjpDa3cYEu6gGg1qo8A6gb"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3zhxrXqDdLFcBZiX3zje257i6w3NJnRyPgHyEIhKMh andrew@proxy-server"
+      ];
+    };
+
+    storage = {
+      isSystemUser = true;
+      group = "storage";
+    };
+
   };
 
   nix.settings = {
@@ -290,6 +304,81 @@
       ];
     };
   };
+
+  ###
+  # Samba
+  ###
+  services.samba = {
+    enable = true;
+    securityType = "user";
+    openFirewall = true;
+    extraConfig = ''
+        workgroup = WORKGROUP
+        server string = vaulty-server
+        netbios name = vaulty-server
+        security = user
+        #use sendfile = yes
+        #max protocol = smb2
+        # note: localhost is the ipv6 localhost ::1
+        # hosts allow = 192.168.0. 127.0.0.1 localhost
+        # hosts deny = 0.0.0.0/0
+        guest account = nobody
+        map to guest = bad user
+        mangled names = no
+    '';
+    shares = {
+      storage = {
+        path = "/mnt/storage/Storage";
+        browseable = "yes";
+        "read only" = "no";
+        "guest ok" = "yes";
+        "create mask" = "0644";
+        "directory mask" = "0755";
+        "force user" = "storage";
+        "force group" = "storage";
+      };
+    };
+  };
+
+  # unstable in 24.11
+  # services.samba = {
+  #   enable = true;
+  #   securityType = "user";
+  #   openFirewall = true;
+  #   settings = {
+  #     global = {
+  #       "workgroup" = "WORKGROUP";
+  #       "server string" = "vaulty-server";
+  #       "netbios name" = "vaulty-server";
+  #       "security" = "user";
+  #       #"use sendfile" = "yes";
+  #       #"max protocol" = "smb2";
+  #       # note: localhost is the ipv6 localhost ::1
+  #       # "hosts allow" = "192.168.0. 127.0.0.1 localhost";
+  #       # "hosts deny" = "0.0.0.0/0";
+  #       "guest account" = "nobody";
+  #       "map to guest" = "bad user";
+  #     };
+  #     "storage" = {
+  #       "path" = "/mnt/storage/Storage";
+  #       "browseable" = "yes";
+  #       "read only" = "no";
+  #       "guest ok" = "yes";
+  #       "create mask" = "0644";
+  #       "directory mask" = "0755";
+  #       "force user" = "storage";
+  #       "force group" = "storage";
+  #     };
+  #   };
+  # };
+
+services.samba-wsdd = {
+  enable = true;
+  openFirewall = true;
+};
+
+# networking.firewall.enable = true;
+networking.firewall.allowPing = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

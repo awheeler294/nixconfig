@@ -97,7 +97,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
 
-          home-manager.users.andrew = import ./home.nix;
+          home-manager.users.andrew = import ./home/andrew.nix;
 	  home-manager.extraSpecialArgs = {
 	    inherit inputs;
 	  };

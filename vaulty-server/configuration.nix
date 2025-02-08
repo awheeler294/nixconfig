@@ -5,6 +5,8 @@
 { config, pkgs, ... }:
 
 {
+  environment.pathsToLink = [ "/share/zsh" ];
+  programs.zsh.enable = true;
   imports =
     [
       ../modules/sway.nix
@@ -85,6 +87,7 @@
       isNormalUser = true;
       description = "andrew";
       extraGroups = [ "networkmanager" "wheel" "storage" "disk" "video" "docker" ];
+      shell = pkgs.zsh;
       packages = with pkgs; [
       #  thunderbird
       ];
@@ -155,7 +158,6 @@
     vim
     wget
     wireguard-tools
-    zsh
   ];
 
   fonts.packages = with pkgs; [
@@ -207,6 +209,8 @@
       "/.snapshots/"
     ];
   };
+
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   systemd.services."snapraid-runner" = {
     script = ''
@@ -305,31 +309,26 @@
     };
   };
 
-  ###
-  # Samba
-  ###
   services.samba = {
     enable = true;
-    securityType = "user";
     openFirewall = true;
-    extraConfig = ''
-        workgroup = WORKGROUP
-        server string = vaulty-server
-        netbios name = vaulty-server
-        security = user
-        #use sendfile = yes
-        #max protocol = smb2
+    settings = {
+      global = {
+        "workgroup" = "WORKGROUP";
+        "server string" = "vaulty-server";
+        "netbios name" = "vaulty-server";
+        "security" = "user";
+        #"use sendfile" = "yes";
+        #"max protocol" = "smb2";
         # note: localhost is the ipv6 localhost ::1
-        # hosts allow = 192.168.0. 127.0.0.1 localhost
-        # hosts deny = 0.0.0.0/0
-        guest account = nobody
-        map to guest = bad user
-        mangled names = no
-    '';
-    shares = {
-      storage = {
-        path = "/mnt/storage/Storage";
-        browseable = "yes";
+        # "hosts allow" = "192.168.0. 127.0.0.1 localhost";
+        # "hosts deny" = "0.0.0.0/0";
+        "guest account" = "nobody";
+        "map to guest" = "bad user";
+      };
+      "storage" = {
+        "path" = "/mnt/storage/Storage";
+        "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "yes";
         "create mask" = "0644";
@@ -340,45 +339,13 @@
     };
   };
 
-  # unstable in 24.11
-  # services.samba = {
-  #   enable = true;
-  #   securityType = "user";
-  #   openFirewall = true;
-  #   settings = {
-  #     global = {
-  #       "workgroup" = "WORKGROUP";
-  #       "server string" = "vaulty-server";
-  #       "netbios name" = "vaulty-server";
-  #       "security" = "user";
-  #       #"use sendfile" = "yes";
-  #       #"max protocol" = "smb2";
-  #       # note: localhost is the ipv6 localhost ::1
-  #       # "hosts allow" = "192.168.0. 127.0.0.1 localhost";
-  #       # "hosts deny" = "0.0.0.0/0";
-  #       "guest account" = "nobody";
-  #       "map to guest" = "bad user";
-  #     };
-  #     "storage" = {
-  #       "path" = "/mnt/storage/Storage";
-  #       "browseable" = "yes";
-  #       "read only" = "no";
-  #       "guest ok" = "yes";
-  #       "create mask" = "0644";
-  #       "directory mask" = "0755";
-  #       "force user" = "storage";
-  #       "force group" = "storage";
-  #     };
-  #   };
-  # };
+  services.samba-wsdd = {
+    enable = true;
+    openFirewall = true;
+  };
 
-services.samba-wsdd = {
-  enable = true;
-  openFirewall = true;
-};
-
-# networking.firewall.enable = true;
-networking.firewall.allowPing = true;
+  # networking.firewall.enable = true;
+  networking.firewall.allowPing = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -148,6 +148,7 @@
     nvme-cli
     python3
     sanoid
+    sl
     smartmontools
     snapraid
     # snapraid-runner

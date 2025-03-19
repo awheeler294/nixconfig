@@ -144,6 +144,7 @@
     inputs.helix.packages."${pkgs.system}".helix
     minetest
     firefox
+    tic-80
   ];
 
   # Set default editor

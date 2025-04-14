@@ -43,7 +43,7 @@
     theme = "breeze";
   };
 
-  networking.hostName = "aspire-e15-nixos"; # Define your hostname.
+  networking.hostName = "shoebox-nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary

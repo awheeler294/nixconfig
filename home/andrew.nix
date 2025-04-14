@@ -8,6 +8,9 @@
 
   home.username = "andrew";
   home.homeDirectory = "/home/andrew";
+  home.sessionPath = [
+    "$HOME/bin"
+  ];
 
   programs.git = {
     enable = true;

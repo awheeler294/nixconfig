@@ -150,8 +150,6 @@
   # Set default editor
   environment.variables.EDITOR = "nvim";
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
   environment.pathsToLink = [ "/share/zsh" ];
 
   # Perform garbage collection weekly to maintain low disk usage

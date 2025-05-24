@@ -105,7 +105,7 @@
 
   home.shellAliases = {
       ls = "eza --icons";
-      ll ="eza --icons -lhag";
+      ll ="eza --icons -lhaag";
       tree = "eza --icons --tree";
 
       cp = "cp -i";       # Confirm before overwriting something            

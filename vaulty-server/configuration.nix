@@ -105,7 +105,7 @@
       isSystemUser = true;
       group = "storage";
     };
-
+    
   };
 
   nix.settings = {
@@ -132,6 +132,7 @@
     gcc
     git
     gnumake
+    gnupg
     gptfdisk
     htop
     hddtemp
@@ -147,6 +148,8 @@
     nmap
     nvme-cli
     python3
+    pinentry-curses
+    podman-tui
     sanoid
     sl
     smartmontools
@@ -180,6 +183,13 @@
     enable = true;
     settings.PasswordAuthentication = false;
     settings.PermitRootLogin = "no";
+  };
+
+  services.pcscd.enable = true;
+  programs.gnupg.agent = {
+     enable = true;
+     enableSSHSupport = true;
+     pinentryPackage = pkgs.pinentry-curses;
   };
 
   services.snapraid = {
@@ -234,6 +244,9 @@
   };
 
   virtualisation = {
+    # Enable common container config files in /etc/containers
+    containers.enable = true;
+    
     docker = {
       enable = true;
       autoPrune = {
@@ -241,6 +254,17 @@
         dates = "weekly";
       };
     };
+  
+    podman = {
+      enable = true;
+
+      # Create a `docker` alias for podman, to use it as a drop-in replacement
+      #dockerCompat = true;
+
+      # Required for containers under podman-compose to be able to talk to each other.
+      defaultNetwork.settings.dns_enabled = true;
+    };
+
   };
 
   systemd.services.start-docker-compose = {
@@ -332,8 +356,8 @@
         "browseable" = "yes";
         "read only" = "no";
         "guest ok" = "yes";
-        "create mask" = "0644";
-        "directory mask" = "0755";
+        "create mask" = "0664";
+        "directory mask" = "0775";
         "force user" = "storage";
         "force group" = "storage";
       };

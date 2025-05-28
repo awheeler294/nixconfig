@@ -6,11 +6,14 @@
 
 {
   imports = [ 
-    ../modules/sway.nix
-    ../modules/kiduser.nix
-    
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    ../modules/common-base.nix
+    ../modules/common-gui.nix
+    
+    ../modules/sway.nix
+    ../modules/kiduser.nix
   ];
 
   # Bootloader.

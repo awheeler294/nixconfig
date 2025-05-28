@@ -1,8 +1,5 @@
 { config, pkgs, inputs, lib, ... }:
 
-let 
-  inherit (inputs) ssh-keys;
-in
 {
 
   # Enable networking
@@ -36,7 +33,7 @@ in
     extraGroups = [ "networkmanager" "wheel" "storage" "disk" "video" "docker" ];
     shell = pkgs.zsh;
     hashedPassword = "$y$j9T$Xop5RxMU4AyqJgL/tYq7o0$TQAA6O04WqaY3wCYrcR2GjpckbJqb0mRZDMsxOIEIJC";
-    openssh.authorizedKeys.keys = [ ssh-keys.outPath ];
+    openssh.authorizedKeys.keyFiles = [ inputs.ssh-keys.outPath ];
     # packages = with pkgs; [
     #   firefox
     #   neovim

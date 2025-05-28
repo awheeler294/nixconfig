@@ -23,7 +23,9 @@
   home.packages = with pkgs; [
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
-
+    bat
+    helix
+    micro-full
     neofetch
     nnn # terminal file manager
 
@@ -103,6 +105,47 @@
 
   programs.hstr.enable = true;
 
+  programs.bash = {
+    enable = false;
+    enableCompletion = true;
+    bashrcExtra = ''
+      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+    '';
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
+  # starship - an customizable prompt for any shell
+  programs.starship = {
+    enable = true;
+  };
+
+  programs.helix = {
+    enable = true;
+    settings = {
+      theme = "autumn_night_transparent";
+      editor.cursor-shape = {
+        normal = "block";
+        insert = "bar";
+        select = "underline";
+      };
+    };
+    languages.language = [{
+      name = "nix";
+      auto-format = true;
+      formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+    }];
+    themes = {
+      autumn_night_transparent = {
+        "inherits" = "autumn_night";
+        "ui.background" = { };
+      };
+    };
+  };
+
   home.shellAliases = {
       ls = "eza --icons";
       ll ="eza --icons -lhaag";
@@ -120,24 +163,6 @@
 
       urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
       urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
-  };
-
-  programs.bash = {
-    enable = false;
-    enableCompletion = true;
-    bashrcExtra = ''
-      export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
-    '';
-  };
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
-
-  # starship - an customizable prompt for any shell
-  programs.starship = {
-    enable = true;
   };
 
 }

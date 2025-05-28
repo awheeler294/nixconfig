@@ -33,7 +33,7 @@
     
     syntaxHighlighting.enable = true;
 
-    initExtra = ''
+    initContent = ''
       # Print some system information when the shell is first started
       # Print a greeting message when shell is started
       echo $USER@$HOST  $(uname -srm)

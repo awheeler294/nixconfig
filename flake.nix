@@ -15,12 +15,12 @@
   };
 
   inputs = {
-    # NixOS official package source, using the nixos-24.11 branch here
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    # NixOS official package source, using the nixos-25.05 branch here
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     # home-manager, used for managing user configuration
    
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       # The `follows` keyword in inputs is used for inheritance.
       # Here, `inputs.nixpkgs` of home-manager is kept consistent with
       # the `inputs.nixpkgs` of the current flake,
@@ -29,10 +29,15 @@
     };
 
     # helix editor, use the master branch
-    helix.url = "github:helix-editor/helix/master";
+    # helix.url = "github:helix-editor/helix/master";
 
     nvim-kickstart = {
       url = "github:awheeler294/kickstart.nvim";
+      flake = false;
+    };
+
+    ssh-keys = {
+      url = "https://github.com/awheeler294.keys";
       flake = false;
     };
 
@@ -67,8 +72,7 @@
 
 	# make home-manager as a module of nixos
         # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
-        home-manager.nixosModules.home-manager
-        {
+        home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
 

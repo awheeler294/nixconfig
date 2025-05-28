@@ -27,7 +27,9 @@
   #   "Xft.dpi" = 172;
   # };
 
-  fonts.fontconfig.enable = true;
+  fonts = {
+    fontconfig.enable = true;
+  };
 
   xdg = {
     enable = true;
@@ -52,11 +54,6 @@
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     zoom-us
-
-    # nerd fonts
-    (pkgs.nerdfonts.override {
-      fonts = [ "Hack" "FiraCode" "DroidSansMono" "Mononoki" ];
-    })
 
   ];
 

@@ -53,27 +53,6 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "America/Boise";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -96,80 +75,15 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.andrew = {
-    isNormalUser = true;
-    description = "Andrew";
-    extraGroups = [ "networkmanager" "video" "wheel" ];
-    shell = pkgs.zsh;
-    # packages = with pkgs; [
-    #   firefox
-    #   neovim
-    #   thunderbird
-    # ];
-  };
-
-  security.polkit.enable = true;
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  nix.settings = {
-    # Enable the Flakes feature and the accompanying new nix command-line tool
-    experimental-features = [ "nix-command" "flakes" ];
-    
-    # given the users in this list the right to specify additional substituters via:
-    #    1. `nixConfig.substituters` in `flake.nix`
-    #    2. command line args `--options substituters http://xxx`
-    trusted-users = ["andrew"];
-
-    substituters = [
-      "https://cache.nixos.org"
-    ];
-
-    trusted-public-keys = [
-      # the default public key of cache.nixos.org, it's built-in, no need to add it here
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-    ];
-
-  };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    git
-    gcc
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    neovim
-    wget
-    curl
-    # Here, the helix package is installed from the helix input data source
-    inputs.helix.packages."${pkgs.system}".helix
     minetest
     firefox
-    tic-80
+    # tic-80
   ];
 
-  # Set default editor
-  environment.variables.EDITOR = "nvim";
-
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  environment.pathsToLink = [ "/share/zsh" ];
-
-  # Perform garbage collection weekly to maintain low disk usage
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 1m";
-  };
-
-  # Optimize storage
-  # You can also manually optimize the store via:
-  #    nix-store --optimise
-  # Refer to the following link for more details:
-  # https://nixos.org/manual/nix/stable/command-ref/conf-file.html#conf-auto-optimise-store
-  nix.settings.auto-optimise-store = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -179,12 +93,10 @@
   #   enableSSHSupport = true;
   # };
 
-  programs.zsh.enable = true;
-
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

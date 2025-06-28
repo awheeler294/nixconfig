@@ -52,7 +52,7 @@
         pkgs.qt6.qt5compat
       ];
     };
-    displayManager.defaultSession = "cinnamon";
+    displayManager.defaultSession = lib.mkDefault "cinnamon";
   };
 
   environment.systemPackages = with pkgs; [

@@ -62,6 +62,11 @@
     settings.PermitRootLogin = "no";
   };
 
+  # Enable automatic login for the user.
+  services.displayManager.autoLogin.enable = lib.mkForce true;
+  services.displayManager.autoLogin.user = lib.mkForce "andrew";
+  services.displayManager.defaultSession = lib.mkForce "sway";
+
   # users.users.andrew = {
   #   openssh.authorizedKeys.keys = [
   #     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3zhxrXqDdLFcBZiX3zje257i6w3NJnRyPgHyEIhKMh andrew@proxy-server"

@@ -20,7 +20,7 @@
   };
 
   # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = true;
-  services.displayManager.autoLogin.user = "kid";
+  services.displayManager.autoLogin.enable = lib.mkDefault true;
+  services.displayManager.autoLogin.user = lib.mkDefault "kid";
 
 }

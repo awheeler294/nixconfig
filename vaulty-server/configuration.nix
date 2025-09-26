@@ -8,6 +8,7 @@
   imports = [ 
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./services.nix
 
     ../modules/common-base.nix
     ../modules/common-gui.nix

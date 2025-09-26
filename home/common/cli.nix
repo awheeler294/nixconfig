@@ -58,6 +58,7 @@
     file
     which
     tree
+    tealdeer
     gnused
     gnutar
     gawk
@@ -103,8 +104,6 @@
     enable = true;
   };
 
-  programs.hstr.enable = true;
-
   programs.bash = {
     enable = false;
     enableCompletion = true;
@@ -113,15 +112,7 @@
     '';
   };
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
-
-  # starship - an customizable prompt for any shell
-  programs.starship = {
-    enable = true;
-  };
+  programs.hstr.enable = true;
 
   programs.helix = {
     enable = true;
@@ -144,6 +135,21 @@
         "ui.background" = { };
       };
     };
+  };
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
+  # starship - an customizable prompt for any shell
+  programs.starship = {
+    enable = true;
+  };
+
+  programs.tealdeer = {
+    enable = true;
+    enableAutoUpdates = true;
   };
 
   home.shellAliases = {

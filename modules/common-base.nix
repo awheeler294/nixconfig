@@ -71,6 +71,7 @@
   environment.systemPackages = with pkgs; [
     btop
     curl
+    dua
     fd
     git
     gcc
@@ -81,6 +82,7 @@
     neovim
     python3
     sl
+    tealdeer
     tmux
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget

@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1749154018,
-        "narHash": "sha256-gjN3j7joRvT3a8Zgcylnd4NFsnXeDBumqiu4HmY1RIg=",
+        "lastModified": 1758463745,
+        "narHash": "sha256-uhzsV0Q0I9j2y/rfweWeGif5AWe0MGrgZ/3TjpDYdGA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "7aae0ee71a17b19708b93b3ed448a1a0952bf111",
+        "rev": "3b955f5f0a942f9f60cdc9cacb7844335d0f21c3",
         "type": "github"
       },
       "original": {
@@ -23,11 +23,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1749727998,
-        "narHash": "sha256-mHv/yeUbmL91/TvV95p+mBVahm9mdQMJoqaTVTALaFw=",
+        "lastModified": 1758791193,
+        "narHash": "sha256-F8WmEwFoHsnix7rt290R0rFXNJiMbClMZyIC/e+HYf0=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "fd487183437963a59ba763c0cc4f27e3447dd6dd",
+        "rev": "25e53aa156d47bad5082ff7618f5feb1f5e02d01",
         "type": "github"
       },
       "original": {
@@ -40,11 +40,11 @@
     "nvim-kickstart": {
       "flake": false,
       "locked": {
-        "lastModified": 1712240122,
-        "narHash": "sha256-d1lPgz0swFf7m+3/IuWUfL+BgS3vPh9VRsmTWjCAqMw=",
+        "lastModified": 1755818471,
+        "narHash": "sha256-+nledKtCyxVykyPc0son6t3mKSLL8O259s6WpSu4Ltg=",
         "owner": "awheeler294",
         "repo": "kickstart.nvim",
-        "rev": "9f18d089e56316555e07f5ec313048f2d7ce70a9",
+        "rev": "dc3ede10b9e1cbedb82c3e00a9ddadbc135517e1",
         "type": "github"
       },
       "original": {
@@ -64,7 +64,7 @@
     "ssh-keys": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-zRmQPq6daPWlrPxqpNHmcXgFm/0LYNKz7NBNpntC4fc=",
+        "narHash": "sha256-ZGc93ry7XPeAHxZ90nJVKNKt/m8ehQoJx+k+0u64juU=",
         "type": "file",
         "url": "https://github.com/awheeler294.keys"
       },

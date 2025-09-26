@@ -28,6 +28,7 @@
     firefox
     minetest
     pavucontrol
+    phinger-cursors
     # tic-80
   ];
 

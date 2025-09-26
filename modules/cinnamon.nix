@@ -48,8 +48,10 @@
       enable = true;
       package = pkgs.kdePackages.sddm;
       theme = "sddm-astronaut-theme";
+      settings.Theme.Current = "sddm-astronaut-theme";
       extraPackages = with pkgs; [
-        pkgs.qt6.qt5compat
+        qt6.qt5compat
+        sddm-astronaut
       ];
     };
     displayManager.defaultSession = lib.mkDefault "cinnamon";

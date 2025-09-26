@@ -41,6 +41,7 @@
 
   boot.kernelParams = [ "quiet" ];
   boot.initrd.systemd.enable = true;
+  boot.initrd.kernelModules = [ "nfs" ];
   boot.plymouth = {
     enable = true;
     theme = "breeze";
@@ -77,6 +78,22 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  environment.systemPackages = with pkgs; [
+    qbittorrent
+    pkgs.cifs-utils #For mount.cifs, required unless domain name resolution is not needed.
+  ];
+
+  # Network Drive Mounts
+  fileSystems."/mnt/vaulty-server" = {
+    device = "//192.168.1.5/storage";
+    fsType = "cifs";
+    options = let
+      # this line prevents hanging on network split
+      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+
+    in ["${automount_opts},credentials=/etc/nixos/smb-secrets"];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

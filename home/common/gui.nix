@@ -52,10 +52,22 @@
   };
 
   # Packages that should be installed to the user profile.
-  home.packages = with pkgs; [
-    zoom-us
+  home = {
+    packages = with pkgs; [
+      zoom-us
+    ];
 
-  ];
+    preferXdgDirectories = true;
+
+    pointerCursor = {
+      enable = true;
+      name = "phinger-cursors-dark";
+      package = pkgs.phinger-cursors;
+      size = 32;
+      gtk.enable = true;
+      sway.enable = true;
+    };
+  };
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
   programs.alacritty = {

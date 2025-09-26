@@ -29,6 +29,7 @@
     minetest
     pavucontrol
     phinger-cursors
+    thonny
     # tic-80
   ];
 

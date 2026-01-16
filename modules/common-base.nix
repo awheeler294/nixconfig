@@ -72,6 +72,7 @@
     btop
     curl
     fd
+    figlet
     git
     gcc
     helix

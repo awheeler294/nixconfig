@@ -26,7 +26,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     firefox
-    minetest
+    luanti
     pavucontrol
     phinger-cursors
     thonny

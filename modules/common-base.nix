@@ -2,11 +2,29 @@
 
 {
 
+  home-manager.backupFileExtension = ".bak";
+  home-manager.users.andrew = {
+    xdg.mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "inode/directory" = "thunar.desktop";
+        "x-scheme-handler/sgnl" = "signal.desktop";
+        "x-scheme-handler/signalcaptcha" = "signal.desktop";
+        "text/html" = "vivaldi-stable.desktop";
+        "x-scheme-handler/http" = "vivaldi-stable.desktop";
+        "x-scheme-handler/https" = "vivaldi-stable.desktop";
+        "x-scheme-handler/about" = "vivaldi-stable.desktop";
+        "x-scheme-handler/unknown" =" vivaldi-stable.desktop";
+        "video/vnd.radgamettools.bink" = "io.github.celluloid_player.Celluloid.desktop";
+      };
+    };
+  };
+
   # Enable networking
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "America/Boise";
+  time.timeZone = lib.mkDefault "America/Boise";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -73,17 +91,21 @@
     curl
     dua
     fd
+    figlet
     git
     gcc
     gdu
     helix
     htop
+    inetutils
     jq
     ncdu
     neovim
     python3
     sl
     tealdeer
+    tldr
+    trashy
     tmux
     unison
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -119,6 +141,5 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
 
 }

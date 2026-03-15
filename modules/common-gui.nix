@@ -25,16 +25,41 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    luanti
+    cacert
     firefox
+    luanti
+    minutor
+    pavucontrol
+    phinger-cursors
+    prismlauncher
+    thonny
     # tic-80
   ];
 
-  fonts.packages = with pkgs; [
-    pkgs.nerd-fonts.hack
-    pkgs.nerd-fonts.fira-code
-    pkgs.nerd-fonts.droid-sans-mono
-    pkgs.nerd-fonts.mononoki
-  ];
+  fonts = {
+    
+    enableDefaultPackages = true;
+
+    fontDir.enable = true;
+
+    packages = with pkgs; [
+      dina-font
+      fira-code
+      fira-code-symbols
+      liberation_ttf
+      miracode
+      monocraft
+      mplus-outline-fonts.githubRelease
+      nerd-fonts.hack
+      nerd-fonts.fira-code
+      nerd-fonts.droid-sans-mono
+      nerd-fonts.mononoki
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
+      proggyfonts
+    ];
+
+  };
 
 }

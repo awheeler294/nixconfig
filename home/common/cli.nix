@@ -36,6 +36,7 @@
     p7zip
 
     # utils
+    caligula # cli disk image writer, like etcher 
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
     jq # A lightweight and flexible command-line JSON processor

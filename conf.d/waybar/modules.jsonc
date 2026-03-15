@@ -1,12 +1,80 @@
 {
+   "custom/launcher": {
+      "format":"",
+      "tooltip": false,
+      "on-click": "pgrep fuzzel && killall fuzzel || fuzzel -a top-left --x-margin=5 --y-margin=5"
+   },
+
+   "group/group-tray": {
+      "orientation": "inherit",
+      "modules": [
+         "tray" 
+      ]
+   },
+
+   "group/group-tools": {
+      "orientation": "inherit",
+      "drawer": {
+         "transition-duration": 500,
+         "children-class": "tools-drawer",
+         // "click-to-reveal": true,
+         "transition-left-to-right": false
+      },
+      "modules": [
+         "custom/infolabel",
+         "custom/htop",
+         "custom/shot"
+      ]
+   },
+
+   "group/group-tools-compact": {
+      "orientation": "inherit",
+      "drawer": {
+         "transition-duration": 500,
+         "children-class": "tools-drawer",
+         // "click-to-reveal": true,
+         "transition-left-to-right": false
+      },
+      "modules": [
+         "custom/infolabel",
+         "custom/htop",
+         "custom/shot",
+         "backlight",
+         "tray" 
+      ]
+   },
+
+   "custom/infolabel": {
+      "format": " ",
+      "tooltip": false
+   },
+
+   "custom/htop": {
+      "format":"",
+      "tooltip-format": "top",
+      "on-click":"alacritty -e btop"
+   },
+
+   "custom/shot": {
+      "format":"",
+      "tooltip-format": "screenshot",
+      "on-click":"niri msg action screenshot-screen"
+   },
+
    "keyboard-state": {
-       "numlock": false,
-       "capslock": true,
-       "format": "{icon}",
-       "format-icons": {
-           "locked": "caps",
-           "unlocked": ""
-       }
+      "numlock": false,
+      "capslock": true,
+      "format": "{icon}",
+      "format-icons": {
+        "locked": "caps",
+        "unlocked": ""
+      }
+   },
+
+   "sway/window": {
+      "all-outputs": true,
+      "offscreen-css": true,
+      "offscreen-css-text": "󰨇"
    },
 
    "sway/scratchpad": {
@@ -17,9 +85,32 @@
       "tooltip-format": "{app}: {title}"
    },
 
+   "niri/window": {
+      "format": "{title}",
+      "rewrite": {
+         "(.*) - YouTube (- Vivaldi)*(- Mozilla Firefox)*.*": "󰖟  $1",
+         // "(.*) - YouTube - Vivaldi.*": "🌎  $1",
+         // "(.*) - YouTube - Mozilla Firefox.*": "󰈹  $1",
+         "(.*) - Mozilla Firefox": " $1",
+         "(.*) - Vivaldi": "󰖟 $1",
+         // "(.*) - YouTube.*": " $1 ",
+         "(.*) - vim": " $1",
+         "(.*) - zsh": " [$1]"
+      },
+      "separate-outputs": true,
+      "on-click": "niri msg --json focused-window | jq -r '.title' | wl-copy"
+   },
+
    "mpris": {
-      "format": "{status}: {dynamic}",
-      "format-paused": "{status}: {dynamic}"
+      "format": "{player_icon} {title}",
+      "format-paused": "{status_icon} {title}",
+      "player-icons": {
+         "default": "",
+         "mpv": ""
+      },
+      "status-icons": {
+         "paused": ""
+      }
    },
 
    "idle_inhibitor": {
@@ -61,12 +152,10 @@
             "weeks":      "<span color='#95e6cb'><b>W{}</b></span>",
             "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
             "today":      "<span color='#ff6699'><b>{}</b></span>"
-            }
-         },
+         }
+      },
       "actions": {
          "on-click-right": "mode",
-         "on-click-forward": "tz_up",
-         "on-click-backward": "tz_down",
          "on-scroll-up": "shift_up",
          "on-scroll-down": "shift_down"
       }
@@ -78,25 +167,56 @@
          "warning": 30,
          "critical": 15
       },
-      "format": "{capacity}% {icon}",
-      "format-charging": "{capacity}% 󰂄",
-      "format-plugged": "{capacity}% ",
-      "format-alt": "{time} {icon}",
+      "format": "{icon}  {capacity}%",
+      "format-charging": "󰂄 {capacity}%",
+      "format-plugged": " {capacity}% ",
+      "format-alt": "{icon} {time}",
       // "format-good": "", // An empty format will hide the module
       // "format-full": "",
       "format-icons": ["", "", "", "", ""]
    },
 
    "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon}",
-        "format-bluetooth": " {volume}% {icon}",
-        "format-bluetooth-muted": " ",
-        "format-muted": "",
-        "format-icons": {
-            "default": ["", "", ""]
-        },
-        "on-click": "pactl set-sink-mute 0 toggle",
-        "on-click-right": "pgrep pavucontrol && killall pavucontrol || pavucontrol"
-   }
+      // "scroll-step": 1, // %, can be a float
+      "format": "{icon} {volume}%",
+      // "format-bluetooth": "{icon} {volume}%",
+      // "format-bluetooth-muted": "",
+      "format-muted": "",
+      "format-icons": {
+         "default": ["", "", ""]
+      },
+      "on-click": "pactl set-sink-mute 0 toggle",
+      "on-click-right": "pgrep pavucontrol && killall pavucontrol || pavucontrol"
+   },
+
+   "wlr/taskbar": {
+      "tooltip-format": "{title} | {app_id}"
+   },
+
+   "network": {
+      "format":"",
+      "on-click":"nm-connection-editor",
+      "format-ethernet":"󰈀",
+      "format-wifi":"{icon} {signalStrength}%",
+      "format-disconnected":"󰤭",
+      "format-icons": ["󰤟","󰤢","󰤥","󰤨"],
+      "tooltip-format-wifi":"{essid}: ({signalStrength}%)",
+      "tooltip-format-ethernet":"{ifname}",
+      "tooltip-format-disconnected":"󰈂",
+   },
+
+   "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰃞", "󰃟", "󰃝", "󰃠"],
+    "scroll-step": 5,
+   },
+
+   "niri/workspaces": {
+      "format": "{icon}",
+      "format-icons": {
+         "active": "",
+         "default": ""
+      }
+   },
+
 }

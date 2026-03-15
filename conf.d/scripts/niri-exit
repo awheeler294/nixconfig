@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+command="$(echo -e " Reboot\n" "Shutdown\n" "Lock\n" "Suspend\n" "Hibernate\n" "Exit" | fuzzel --dmenu --index)"
+
+echo $command
+
+case $command in
+   
+   0)
+      echo "rebooting"
+      systemctl reboot
+      ;;
+   
+   1)
+      echo "shuting down"
+      systemctl poweroff
+      ;;
+   
+   2)
+      echo "locking"
+      swaylock-swww -g 0 -f 0
+      echo "resuming"
+      ;;
+   
+   3)
+      echo "suspending"
+      systemctl suspend
+      ;;
+   
+   4)
+      echo "hibernating"
+      systemctl hibernate
+      ;;
+   
+   5)
+      echo "exiting"
+      niri msg action quit
+      ;;
+
+esac

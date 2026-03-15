@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+trim() {
+    local var="$*"
+    # remove leading whitespace characters
+    var="${var#"${var%%[![:space:]]*}"}"
+    # remove trailing whitespace characters
+    var="${var%"${var##*[![:space:]]}"}"
+    printf '%s' "$var"
+}
+
+while getopts ":f:g:" opt; do
+  case $opt in
+    f) f_arg="$OPTARG"
+    ;;
+    g) g_arg="$OPTARG"
+    ;;
+    \?) echo "Invalid option -$OPTARG" >&2
+    exit 1
+    ;;
+  esac
+
+  case $OPTARG in
+    -*) echo "Option $opt needs a valid argument"
+    exit 1
+    ;;
+  esac
+done
+
+fade_in="${f_arg-0.0}"
+grace="${g_arg-0}"
+image_args=""
+
+while IFS=":" read -a line
+do
+   output=$(trim "${line[1]}")
+   image=$(trim "${line[5]}")
+   image_arg="$output:$image"
+   image_arg=$(builtin printf '%q' "$image_arg")
+
+   image_args+="-i $image_arg "
+   # echo "$output"
+   # echo "$image"
+
+   # echo "0: ${line[0]}"
+   # echo "1: ${line[1]}"
+   # echo "2: ${line[2]}"
+   # echo "3: ${line[3]}"
+   # echo "4: ${line[4]}"
+   # echo "5: ${line[5]}"
+   # echo "6: ${line[6]}"
+   # echo "7: ${line[7]}"
+   # echo "8: ${line[8]}"
+   # echo "9: ${line[9]}"
+done < <(swww query)
+
+# echo "$image_args"
+
+echo "swaylock --config $HOME/.config/swaylock/config-fx --grace $grace --fade-in $fade_in $image_args"
+# swaylock --config "$HOME/.config/swaylock/config-fx" --grace "$grace" --fade-in "$fade_in" $image_args
+swaylock --config "$HOME/.config/swaylock/config-fx" --grace "$grace" --fade-in "$fade_in" $image_args

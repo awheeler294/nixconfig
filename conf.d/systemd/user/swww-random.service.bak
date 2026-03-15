@@ -1,0 +1,20 @@
+[Unit]
+Description=Set a random wallpaper using swww
+PartOf=graphical-session.target
+Wants=swww-daemon.service
+After=swww-daemon.service
+Requires=swww-daemon.service
+
+[Service]
+StandardError=journal
+StandardOutput=journal
+Environment=SYSTEMD_LOG_LEVEL=debug
+Environment=HOME=%h
+ExecSearchPath=%h/bin/
+ExecSearchPath=/usr/bin/
+ExecStart=%h/bin/swww-random
+;/usr/bin/echo hello_systemd; /usr/bin/swww img -o eDP-1 $(%h/bin/wallpaper-shuffle Pictures/wallpapers/waneella/animated/horizontal/); /usr/bin/swww img -o DP-1 $(%h/bin/wallpaper-shuffle Pictures/wallpapers/waneella/animated/horizontal/)
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

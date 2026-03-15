@@ -14,8 +14,13 @@
 
   programs.git = {
     enable = true;
-    userName = "Andrew Wheeler";
-    userEmail = "awheeler294@gmail.com";
+    settings = {
+      user = {
+        name = "Andrew Wheeler";
+        email = "awheeler294@gmail.com";
+      };
+      init.defaultBranch = "main";
+    };
   };
 
   # This value determines the home Manager release that your

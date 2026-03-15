@@ -34,7 +34,7 @@ let
       datadir = "${schema}/share/gsettings-schemas/${schema.name}";
     in ''
       gnome_schema=org.gnome.desktop.interface
-      gsettings set $gnome_schema gtk-theme 'Dracula'
+      gsettings set $gnome_schema gtk-theme 'Matcha-dark-azul'
     '';
   };
 
@@ -51,6 +51,7 @@ in
     adwaita-icon-theme  # default gnome cursors
     grim # screenshot functionality
     gruvbox-gtk-theme
+    kanagawa-gtk-theme
     mako # notification system developed by swaywm maintainer
     matcha-gtk-theme
     slurp # screenshot functionality
@@ -73,7 +74,6 @@ in
     alsa.enable = true;
     pulse.enable = true;
   };
-
 
   # xdg-desktop-portal works by exposing a series of D-Bus interfaces
   # known as portals under a well-known name

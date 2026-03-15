@@ -14,6 +14,7 @@
     ../modules/common-gui.nix
     
     ../modules/sway.nix
+    ../modules/niri.nix
   ];
 
   # Bootloader.

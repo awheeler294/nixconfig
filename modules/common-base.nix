@@ -75,6 +75,7 @@
     fd
     git
     gcc
+    gdu
     helix
     htop
     jq
@@ -84,6 +85,7 @@
     sl
     tealdeer
     tmux
+    unison
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     # Here, the helix package is installed from the helix input data source

@@ -145,7 +145,7 @@
     curl
     # Here, the helix package is installed from the helix input data source
     inputs.helix.packages."${pkgs.system}".helix
-    minetest
+    luanti
     firefox
     tic-80
   ];

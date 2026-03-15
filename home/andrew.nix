@@ -14,8 +14,8 @@
 
   programs.git = {
     enable = true;
-    userName = "Andrew Wheeler";
-    userEmail = "awheeler294@gmail.com";
+    settings.user.name = "Andrew Wheeler";
+    settings.user.email = "awheeler294@gmail.com";
   };
 
   # This value determines the home Manager release that your

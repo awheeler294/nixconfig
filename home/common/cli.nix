@@ -4,16 +4,11 @@
 
   imports = [
     ../../modules/zsh.nix
+    ../nvim.nix
   ];
 
   xdg = {
     enable = true;
-
-    # neovim
-    configFile."nvim-kickstart" = {
-      source = "${inputs.nvim-kickstart}";
-      recursive = true;
-    };
     
     # starship
     configFile."starship.toml".source = ../../conf.d/starship/starship.toml;
@@ -136,11 +131,6 @@
         "ui.background" = { };
       };
     };
-  };
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
   };
 
   # starship - an customizable prompt for any shell

@@ -4,6 +4,7 @@
 
   imports = [
     ../home/nvim.nix
+    ../home/zsh.nix
     # ./paneru.nix
   ];
 
@@ -175,25 +176,25 @@
   };
 
   home.shellAliases = {
-      ls = "eza --icons";
-      ll ="eza --icons -lhaag";
-      tree = "eza --icons --tree";
+    ls = "eza --icons";
+    ll ="eza --icons -lhaag";
+    tree = "eza --icons --tree";
 
-      cp = "cp -i";       # Confirm before overwriting something            
-      df = "df -h";       # Human-readable sizes
-      free = "free -m";   # Show sizes in MB
-      grep = "grep -i";   # Case insensitive
+    cp = "cp -i";       # Confirm before overwriting something            
+    df = "df -h";       # Human-readable sizes
+    free = "free -m";   # Show sizes in MB
+    grep = "grep -i";   # Case insensitive
 
-      ssh = "TERM=xterm-256color ssh";
+    ssh = "TERM=xterm-256color ssh";
 
-      vin = "NVIM_APPNAME=nvim-kickstart nvim";
-      hh = "hstr";
+    vin = "NVIM_APPNAME=nvim-kickstart nvim";
+    hh = "hstr";
 
-      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+    urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
+    urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
 
-      nixup = "sudo nix run nix-darwin -- switch --flake ~/.config/nix/darwin --impure";
-      homeup = "sudo darwin-rebuild switch --flake ~/.config/nix/darwin --impure";
+    nixup = "sudo nix run nix-darwin -- switch --flake ~/.config/nix/darwin --impure";
+    homeup = "sudo darwin-rebuild switch --flake ~/.config/nix/darwin --impure";
   };
 
   # Home Manager needs a bit of information about you and the paths it should

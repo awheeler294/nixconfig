@@ -96,6 +96,17 @@
       steam-id() {
          grep -n "name" ~/.steam/steam/steamapps/*.acf | sed -e 's/^.*_//;s/\.acf:.:/ /;s/name//;s/"//g;s/\t//g;s/ /-/' | awk -F"-" '{printf "%-40s %s\n", $2, $1}' | sort
       }
+      
+      # use users running shell for nix-shell and nix develop
+      alias nix-shell='nix-shell --run $SHELL'
+      nix() {
+        if [[ $1 == "develop" ]]; then
+          shift
+          command nix develop -c $SHELL "$@"
+        else
+          command nix "$@"
+        fi
+      }
     '';
   };
 }

@@ -3,7 +3,7 @@
 {
 
   imports = [
-    ../../modules/zsh.nix
+    ../zsh.nix
     ../nvim.nix
   ];
 

@@ -11,6 +11,8 @@
 
       ../modules/common-base.nix
       ../modules/common-gui.nix
+
+      ../modules/dev.nix
     
       ../modules/sway.nix
       ../modules/niri.nix

@@ -28,6 +28,7 @@
       jq-lsp
       kotlin-language-server
       lua-language-server
+      markdownlint-cli
       nginx-language-server
       systemd-language-server
       tree-sitter

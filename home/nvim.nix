@@ -16,6 +16,8 @@
     };
   };
 
+  programs.git.settings.merge.tool = "nvimdiff";
+
   home = {
     packages = with pkgs; [
       autotools-language-server

@@ -167,6 +167,7 @@
         # Import the previous configuration.nix we used,
         # so the old configuration file still takes effect
         ./vaulty-server/configuration.nix
+        ./vaulty-server/home.nix
 
 	# make home-manager as a module of nixos
         # so that home-manager configuration will be deployed automatically when executing `nixos-rebuild switch`
@@ -175,7 +176,6 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
 
-          home-manager.users.andrew = import ./home/andrew.nix;
 	  home-manager.extraSpecialArgs = {
 	    inherit inputs;
 	  };

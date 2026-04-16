@@ -36,7 +36,7 @@ do
    output=$(trim "${line[1]}")
    image=$(trim "${line[5]}")
    image_arg="$output:$image"
-   image_arg=$(builtin printf '%q' "$image_arg")
+   # image_arg=$(builtin printf '%q' "$image_arg")
 
    image_args+="-i $image_arg "
    # echo "$output"

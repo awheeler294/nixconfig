@@ -2,10 +2,6 @@
 
 {
 
-  imports = [ 
-    ./common/gui.nix
-  ];
-
   home.username = "andrew";
   home.homeDirectory = "/home/andrew";
   home.sessionPath = [

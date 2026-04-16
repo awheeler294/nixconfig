@@ -124,7 +124,23 @@
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
-  # services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
+  };
+  
+  # Enable network printer discovery 
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  # Enable auto-discovery of USB printers
+  services.ipp-usb.enable = true;
 
   # Enable sound.
   # services.pulseaudio.enable = true;

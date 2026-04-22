@@ -10,6 +10,9 @@
         ../home/nvim.nix
         ../home/zsh.nix
       ];
+
+      programs.fish.enable = true;
+
     };
 
   };

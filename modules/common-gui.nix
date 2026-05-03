@@ -27,7 +27,7 @@
   environment.systemPackages = with pkgs; [
     cacert
     firefox
-    luanti
+    # luanti
     minutor
     pavucontrol
     phinger-cursors

@@ -19,6 +19,25 @@
     };
   };
 
+  programs.ssh = {
+      enable = true;
+      matchBlocks = {
+         "proxy-server" = {
+            hostname = "45.32.229.198";
+            user = "andrew";
+         };
+         "vaulty-server" = {
+            hostname = "192.168.0.5";
+            user = "andrew";
+         };
+         "forgejo.home.arpa" = {
+            hostname = "forgejo.home.arpa";
+            user = "git";
+            port = 22;
+         };
+      };
+  };
+
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards

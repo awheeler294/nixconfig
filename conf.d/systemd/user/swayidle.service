@@ -1,0 +1,14 @@
+[Unit]
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+StandardError=journal
+StandardOutput=journal
+Environment=SYSTEMD_LOG_LEVEL=debug
+Environment=HOME=%h
+ExecSearchPath=%h/bin/
+ExecSearchPath=/usr/bin/
+ExecStart=/usr/bin/swayidle -w timeout 300 '%h/bin/swaylock-swww -f 30 -g 31' timeout 390 'niri msg action power-off-monitors' timeout 600 'systemctl suspend' before-sleep '%h/bin/swaylock-swww -f 0 -g 0'
+Restart=on-failure

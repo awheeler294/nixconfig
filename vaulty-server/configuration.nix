@@ -2,17 +2,19 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [ 
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./services.nix
 
     ../modules/common-base.nix
     ../modules/common-gui.nix
     
     ../modules/sway.nix
+    ../modules/niri.nix
   ];
 
   # Bootloader.
@@ -57,7 +59,7 @@
   users.users = {
     
     andrew = {
-      extraGroups = [ "storage" ];
+      extraGroups = [ "storage" "cdrom" ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM3zhxrXqDdLFcBZiX3zje257i6w3NJnRyPgHyEIhKMh andrew@proxy-server"
       ];
@@ -77,6 +79,9 @@
   # Install firefox.
   programs.firefox.enable = true;
 
+  # Allow Docker to mount FUSE filesystems
+  programs.fuse.userAllowOther = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -88,14 +93,15 @@
     e2fsprogs # badblocks
     gnumake
     gnupg
+    gocryptfs
     gptfdisk
     hddtemp
     intel-gpu-tools
     inxi
     iotop
     lm_sensors
-    mergerfs
     mc # Midnight Commander, a File Manager and User Shell for the GNU Project
+    mergerfs
     nmap
     nvme-cli
     pinentry-curses
@@ -153,7 +159,7 @@
     ];
     exclude = [
       "*.unrecoverable"
-      "/tmp/"
+      "tmp/"
       "/lost+found/"
       "*.!sync"
       "/.snapshots/"

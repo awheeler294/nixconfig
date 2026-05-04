@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+# >&2 echo "Hello World"
+XDG_DATA_HOME="${XDG_DATA_HOME:=$HOME/.local/share}"
+# >&2 echo $XDG_DATA_HOME
+SHUFFLE="$XDG_DATA_HOME/wallpaper-shuffle"
+# >&2 echo $SHUFFLE
+
+function shuffle_files() {
+   # echo "1" > "$SHUFFLE/$1"
+   ls "$1" | shuf > "$SHUFFLE/$1/shuffle"
+}
+
+[ -d "$SHUFFLE" ] || mkdir -p "$SHUFFLE"
+
+dirs=( "$@" )
+rand=$[$RANDOM % ${#dirs[@]}]
+dir="${dirs[rand]}"
+# >&2 echo $dir
+
+[ -d "$SHUFFLE/$dir" ] || mkdir -p "$SHUFFLE/$dir"
+
+exec 200>"$SHUFFLE/$dir/shuffle.lock" || exit 1
+flock -w 2 200 || exit 1
+trap "rm -f $SHUFFLE/$dir/shuffle.lock" EXIT
+
+[ -s "$SHUFFLE/$dir/shuffle" ] || shuffle_files "$dir"
+[ $(stat -c '%s' "$SHUFFLE/$dir/shuffle") -gt 1 ] || shuffle_files "$dir"
+
+
+readarray -t files < "$SHUFFLE/$dir/shuffle"
+
+result="${files[0]}"
+printf "%s\n" "${files[@]:1}" > "$SHUFFLE/$dir/shuffle"
+
+echo "$dir/$result"

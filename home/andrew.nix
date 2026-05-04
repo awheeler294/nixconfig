@@ -2,10 +2,6 @@
 
 {
 
-  imports = [ 
-    ./common/gui.nix
-  ];
-
   home.username = "andrew";
   home.homeDirectory = "/home/andrew";
   home.sessionPath = [
@@ -14,8 +10,32 @@
 
   programs.git = {
     enable = true;
-    userName = "Andrew Wheeler";
-    userEmail = "awheeler294@gmail.com";
+    settings = {
+      user = {
+        name = "Andrew Wheeler";
+        email = "awheeler294@gmail.com";
+      };
+      init.defaultBranch = "main";
+    };
+  };
+
+  programs.ssh = {
+      enable = true;
+      matchBlocks = {
+         "proxy-server" = {
+            hostname = "45.32.229.198";
+            user = "andrew";
+         };
+         "vaulty-server" = {
+            hostname = "192.168.0.5";
+            user = "andrew";
+         };
+         "forgejo.home.arpa" = {
+            hostname = "forgejo.home.arpa";
+            user = "git";
+            port = 22;
+         };
+      };
   };
 
   # This value determines the home Manager release that your

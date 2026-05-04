@@ -3,17 +3,12 @@
 {
 
   imports = [
-    ../../modules/zsh.nix
+    ../zsh.nix
+    ../nvim.nix
   ];
 
   xdg = {
     enable = true;
-
-    # neovim
-    configFile."nvim-kickstart" = {
-      source = "${inputs.nvim-kickstart}";
-      recursive = true;
-    };
     
     # starship
     configFile."starship.toml".source = ../../conf.d/starship/starship.toml;
@@ -36,6 +31,7 @@
     p7zip
 
     # utils
+    caligula # cli disk image writer, like etcher 
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
     jq # A lightweight and flexible command-line JSON processor
@@ -58,6 +54,7 @@
     file
     which
     tree
+    tealdeer
     gnused
     gnutar
     gawk
@@ -103,8 +100,6 @@
     enable = true;
   };
 
-  programs.hstr.enable = true;
-
   programs.bash = {
     enable = false;
     enableCompletion = true;
@@ -113,15 +108,7 @@
     '';
   };
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
-
-  # starship - an customizable prompt for any shell
-  programs.starship = {
-    enable = true;
-  };
+  programs.hstr.enable = true;
 
   programs.helix = {
     enable = true;
@@ -144,6 +131,16 @@
         "ui.background" = { };
       };
     };
+  };
+
+  # starship - an customizable prompt for any shell
+  programs.starship = {
+    enable = true;
+  };
+
+  programs.tealdeer = {
+    enable = true;
+    enableAutoUpdates = true;
   };
 
   home.shellAliases = {

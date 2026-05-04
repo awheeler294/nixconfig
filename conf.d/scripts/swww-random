@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+
+# import argparse
+import subprocess
+
+from pathlib import Path
+
+TOLERANCE = 0.1
+
+wallpaper_path = Path.home() / Path("Pictures/wallpaper")
+
+# arg_parser = argparse.ArgumentParser("Set a random wallpaper on each display using swww")
+
+output_data = subprocess.check_output(["swww", "query"], text=True).splitlines()
+print(output_data)
+
+for output in output_data:
+   data, _, _ = output.partition(',')
+   name, resolution = data.split(": ")[1:]
+   print(name)
+   print(resolution)
+   width, height = resolution.split('x')
+   width = int(width)
+   height = int(height)
+   # print(width)
+   # print(height)
+
+   aspect_ratio = width / height
+   # print(aspect_ratio)
+   
+   paths = [wallpaper_path / Path("animated/horizontal")]
+
+   if abs(aspect_ratio - 21/9) <= TOLERANCE:
+      print("ultrawide")
+      paths.append(wallpaper_path / Path("ultrawide"))
+
+   elif abs(aspect_ratio - 16/9) <= TOLERANCE:
+      print("widescreen")
+      paths.append(wallpaper_path / Path("hd"))
+   
+   elif abs(aspect_ratio - 16/10) <= TOLERANCE:
+      print("tall widescreen")
+      paths.append(wallpaper_path / Path("vertical"))
+
+   elif abs(aspect_ratio - 4/3) <= TOLERANCE:
+      print("standard")
+      paths.append(wallpaper_path / Path("horizontal"))
+
+   # print(paths)
+
+   wallpaper = subprocess.check_output(["wallpaper-shuffle", *paths], text=True)
+   wallpaper = wallpaper.strip()
+   print(wallpaper)
+
+   subprocess.run(["swww", "img", "-o", name, wallpaper, "--transition-type", "random"])

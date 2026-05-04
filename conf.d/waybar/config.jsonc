@@ -1,0 +1,131 @@
+[
+   {
+      "output": [ 
+         "eDP-1", 
+         "LG Electronics LG ULTRAWIDE 0x0004C1A8", 
+         "HDMI-A-1",
+         "DP-2"
+      ],
+      
+      // Waybar at top layer
+      "layer": "top",
+
+      // Waybar position (top|bottom|left|right)
+      "position": "top",
+
+      // Waybar height (to be removed for auto height)
+      // "height": 32,
+      
+      // Waybar width
+      // "width": 1920,
+      
+      // Gaps between modules (in px)
+      "spacing": 0,
+
+      "include": [
+         "~/.config/waybar/modules.jsonc"
+      ],
+      
+      // Choose the order of the modules
+      "modules-left": [
+         "custom/launcher", 
+         "sway/workspaces", 
+         "sway/scratchpad", 
+         "niri/workspaces", 
+         "keyboard-state", 
+         "sway/mode", 
+         "sway/window", 
+         "niri/window"
+      ],
+
+      "modules-center": [],
+
+      "modules-right": [
+         "clock",
+         "pulseaudio", 
+         "battery", 
+         "network",
+         "bluetooth", 
+         "idle_inhibitor", 
+         "group/group-tools-compact"
+      ],
+
+      "clock": {
+         "format": "{:%H:%M}"
+      }
+
+      // Modules configuration
+      // "sway/workspaces": {
+      //     "disable-scroll": true,
+      //     "all-outputs": true,
+      //     "warp-on-scroll": false,
+      //     "format": "{name}: {icon}",
+      //     "format-icons": {
+      //         "1": "",
+      //         "2": "",
+      //         "3": "",
+      //         "4": "",
+      //         "5": "",
+      //         "urgent": "",
+      //         "focused": "",
+      //         "default": ""
+      //     }
+      // },
+   },
+
+   {
+      "output": [ 
+         "DP-1", 
+         "DP-3", 
+         "ICB DP Unknown", 
+         "PNP(ICB) DP Unknown", 
+         "LG Electronics LG HDR WQHD 0x00009626", 
+         "LG Electronics LG HDR WQHD 0x00069026" 
+      ],
+      
+      // Waybar at top layer
+      "layer": "top",
+
+      // Waybar position (top|bottom|left|right)
+      "position": "top",
+
+      // Waybar height (to be removed for auto height)
+      // "height": 32,
+      
+      // Waybar width
+      // "width": 1920,
+      
+      // Gaps between modules (in px)
+      "spacing": 0,
+
+      "include": [
+         "~/.config/waybar/modules.jsonc"
+      ],
+      
+      // Choose the order of the modules
+      "modules-left": [
+         "custom/launcher", 
+         "sway/workspaces", 
+         "sway/scratchpad", 
+         "niri/workspaces", 
+         "keyboard-state", 
+         "sway/mode",
+         "sway/window",
+         "niri/window"
+      ],
+
+      "modules-center": ["mpris"],
+
+      "modules-right": [
+         "clock",
+         "pulseaudio", 
+         "battery", 
+         "network",
+         "bluetooth", 
+         "idle_inhibitor", 
+         "group/group-tray",
+         "group/group-tools"
+      ]
+
+   }
+]

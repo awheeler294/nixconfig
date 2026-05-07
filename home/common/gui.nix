@@ -33,7 +33,7 @@
 
   xdg = {
     enable = true;
-    
+
     # alacritty
     configFile."alacritty/alacritty.toml".source = ../../conf.d/alacritty/alacritty.toml;
 

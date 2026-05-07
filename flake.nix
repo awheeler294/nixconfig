@@ -41,6 +41,11 @@
       flake = false;
     };
 
+    niri-tweaks = {
+      url = "github:heyoeyo/niri_tweaks";
+      flake = false;
+    };
+
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: let

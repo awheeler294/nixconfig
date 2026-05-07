@@ -60,7 +60,6 @@
     jasper-gtk-theme
     mako # notification system developed by swaywm maintainer
     matcha-gtk-theme
-    mako 
     swayidle 
     swaylock 
     swww
@@ -97,8 +96,9 @@
 
   systemd.user.targets.graphical-session.wants = [ 
     "swww-daemon.service" 
-    "swayidle.service" 
+    "niri-idle.service" 
     "waybar.service"
+    "niri-tile-to-n.service"
   ];
 
   users.users.andrew.extraGroups = [ "input" ];

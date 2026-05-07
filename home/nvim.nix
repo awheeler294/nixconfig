@@ -4,14 +4,25 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+
+    extraLuaConfig = ''
+      require('main.lua') 
+    '';
   };
 
 
   xdg = {
     enable = true;
-    # neovim
+    # kickstart
     configFile."nvim-kickstart" = {
       source = "${inputs.nvim-kickstart}";
+      recursive = true;
+    };
+    # neovim
+    configFile."nvim/lua" = {
+      source = ../conf.d/nvim/lua;
       recursive = true;
     };
   };

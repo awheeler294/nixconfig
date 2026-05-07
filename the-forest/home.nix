@@ -6,7 +6,7 @@
     andrew = {
       imports = [
         ../home/andrew.nix
-        ../home/common/gui.nix
+        ../home/niri.nix
         ../home/nvim.nix
         ../home/zsh.nix
       ];

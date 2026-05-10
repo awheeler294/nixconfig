@@ -177,6 +177,7 @@
     firefox
     git
     lact
+    librewolf
     nvtopPackages.amd
     podman
     podman-compose

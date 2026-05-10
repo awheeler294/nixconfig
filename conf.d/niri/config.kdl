@@ -435,14 +435,12 @@ window-rule {
 }
 
 window-rule {
-    match app-id="vivaldi-stable" title=r#"^*vivaldi*$"#
-    match at-startup=true
+    match app-id="vivaldi-stable" title=r#"^*vivaldi*$"# at-startup=true
     open-on-workspace "vivaldi"
 }
 
 window-rule {
-    match app-id="firefox" title=r#"^*Mozilla Firefox*$"#
-    match at-startup=true
+    match app-id="firefox" title=r#"^*Mozilla Firefox*$"# at-startup=true
     open-on-workspace "firefox"
 }
 
@@ -470,6 +468,8 @@ binds {
     Mod+F2 { spawn "vivaldi" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"; }
     Mod+F3 { spawn "thunar"; }
     Mod+F4 { spawn "bash" "-c" "
+      niri msg action spawn -- vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland; \\
+      niri msg action spawn -- firefox; \\
       niri msg action spawn -- steam; \\
       niri msg action spawn -- discord; \\
       niri msg action spawn -- org.signal.Signal

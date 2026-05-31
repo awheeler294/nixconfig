@@ -96,8 +96,8 @@
 
   systemd.user.targets.graphical-session.wants = [ 
     "swww-daemon.service" 
-    "niri-idle.service" 
     "waybar.service"
+    "niri-idle.service"
     "niri-tile-to-n.service"
   ];
 

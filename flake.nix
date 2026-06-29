@@ -15,12 +15,12 @@
   };
 
   inputs = {
-    # NixOS official package source, using the nixos-25.11 branch here
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    # NixOS official package source, using the nixos-26.05 branch here
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     # home-manager, used for managing user configuration
    
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       # The `follows` keyword in inputs is used for inheritance.
       # Here, `inputs.nixpkgs` of home-manager is kept consistent with
       # the `inputs.nixpkgs` of the current flake,
@@ -44,6 +44,14 @@
     niri-tweaks = {
       url = "github:heyoeyo/niri_tweaks";
       flake = false;
+    };
+
+    nvf = {
+      url = "github:NotAShelf/nvf";
+      # You can override the input nixpkgs to follow your system's
+      # instance of nixpkgs. This is safe to do as nvf does not depend
+      # on a binary cache.
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
   };

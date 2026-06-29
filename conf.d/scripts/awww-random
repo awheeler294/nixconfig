@@ -9,9 +9,9 @@ TOLERANCE = 0.1
 
 wallpaper_path = Path.home() / Path("Pictures/wallpaper")
 
-# arg_parser = argparse.ArgumentParser("Set a random wallpaper on each display using swww")
+# arg_parser = argparse.ArgumentParser("Set a random wallpaper on each display using awww")
 
-output_data = subprocess.check_output(["swww", "query"], text=True).splitlines()
+output_data = subprocess.check_output(["awww", "query"], text=True).splitlines()
 print(output_data)
 
 for output in output_data:
@@ -52,4 +52,4 @@ for output in output_data:
    wallpaper = wallpaper.strip()
    print(wallpaper)
 
-   subprocess.run(["swww", "img", "-o", name, wallpaper, "--transition-type", "random"])
+   subprocess.run(["awww", "img", "-o", name, wallpaper, "--transition-type", "random"])

@@ -22,7 +22,7 @@
   programs.ssh = {
       enable = true;
       enableDefaultConfig = false; # supress deprecation warning
-      matchBlocks = {
+      settings = {
          "*" = {
             forwardAgent = false;
             addKeysToAgent = "no";

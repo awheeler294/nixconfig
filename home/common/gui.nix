@@ -51,7 +51,7 @@
     configFile."sway/config".source = ../../conf.d/sway/config;
     configFile."sway/hotkeys".source = ../../conf.d/sway/hotkeys;
     configFile."sway/import-gtk-settings.sh".source = ../../conf.d/sway/import-gtk-settings.sh;
-    configFile."sway/swww_random.sh".source = ../../conf.d/sway/swww_random.sh;
+    configFile."sway/awww_random.sh".source = ../../conf.d/sway/awww_random.sh;
 
     # swaylock
     configFile."swaylock/config".source = ../../conf.d/swaylock/config;
@@ -69,13 +69,13 @@
 
   systemd.user.services = {
     
-    swww-random = {
+    awww-random = {
     
       Unit = {
-        Description = "Set a random wallpaper using swww";
-        Wants = "swww-daemon.service";
-        After = "swww-daemon.service";
-        Requisite = "swww-daemon.service";
+        Description = "Set a random wallpaper using awww";
+        Wants = "awww-daemon.service";
+        After = "awww-daemon.service";
+        Requisite = "awww-daemon.service";
       };
       
       Service = {
@@ -87,7 +87,7 @@
           "PATH=/run/current-system/sw/bin/:%h/bin" 
         ];
         ExecSearchPath = [ "%h/bin/" ];
-        ExecStart = "${pkgs.python3}/bin/python3 %h/bin/swww-random";
+        ExecStart = "${pkgs.python3}/bin/python3 %h/bin/awww-random";
         Restart = "on-failure";
       };
     
@@ -114,7 +114,7 @@
           "PATH=/run/current-system/sw/bin/:%h/bin" 
         ];
         ExecSearchPath = [ "%h/bin/" ];
-        ExecStart = "${pkgs.swayidle}/bin/swayidle -w timeout 300 '%h/bin/swaylock-swww -f 30 -g 31' timeout 390 'niri msg action power-off-monitors' timeout 600 'systemctl suspend' before-sleep '%h/bin/swaylock-swww -f 0 -g 0'";
+        ExecStart = "${pkgs.swayidle}/bin/swayidle -w timeout 300 '%h/bin/swaylock-awww -f 30 -g 31' timeout 390 'niri msg action power-off-monitors' timeout 600 'systemctl suspend' before-sleep '%h/bin/swaylock-awww -f 0 -g 0'";
         Restart = "on-failure";
       };
 
@@ -149,6 +149,7 @@
 
   gtk = {
     enable = true;
+    gtk4.theme = config.gtk.theme;
     
     theme = {
       name = "Matcha-dark-azul";
@@ -159,6 +160,7 @@
       name = "Qogir-Dark";
     };
   };
+
 
   home = {
     file."bin" = {
@@ -180,7 +182,7 @@
       qogir-icon-theme
       swayidle
       swaylock-effects
-      swww
+      awww
       vimix-icon-theme
       wineWow64Packages.waylandFull
       wireplumber
@@ -225,6 +227,6 @@
     # systemd.target = "sway-session.target";
   };
 
-  services.swww.enable = true;
+  services.awww.enable = true;
   
 }

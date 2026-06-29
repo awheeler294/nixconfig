@@ -475,9 +475,9 @@ binds {
       niri msg action spawn -- org.signal.Signal
     "; }
     Mod+Ctrl+M { spawn "pavucontrol"; }
-    Super+Shift+L { spawn "/home/andrew/bin/swaylock-swww" "-g" "0" "-f" "0"; }
+    Super+Shift+L { spawn "/home/andrew/bin/swaylock-awww" "-g" "0" "-f" "0"; }
     Mod+Return { spawn "alacritty"; }
-    Mod+P { spawn "systemctl" "--user" "start" "swww-random"; }
+    Mod+P { spawn "systemctl" "--user" "start" "awww-random"; }
     Mod+Ctrl+W { spawn "bash" "-c" "notify-send \"$(niri msg focused-window)\""; }
 
     // You can also use a shell:

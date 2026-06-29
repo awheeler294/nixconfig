@@ -57,9 +57,9 @@ in
     slurp # screenshot functionality
     swaylock
     swayidle
-    xfce.thunar
-    xfce.thunar-volman
-    xfce.thunar-archive-plugin
+    thunar
+    thunar-volman
+    thunar-archive-plugin
     xdg-utils # for opening default programs when clicking links
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     wdisplays # tool to configure displays

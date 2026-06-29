@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, lib, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 
 {
 
@@ -14,7 +20,7 @@
         "x-scheme-handler/http" = "firefox.desktop";
         "x-scheme-handler/https" = "firefox.desktop";
         "x-scheme-handler/about" = "firefox.desktop";
-        "x-scheme-handler/unknown" ="firefox.desktop";
+        "x-scheme-handler/unknown" = "firefox.desktop";
         "video/vnd.radgamettools.bink" = "io.github.celluloid_player.Celluloid.desktop";
       };
     };
@@ -48,7 +54,14 @@
   users.users.andrew = {
     isNormalUser = true;
     description = "Andrew";
-    extraGroups = [ "networkmanager" "wheel" "storage" "disk" "video" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "storage"
+      "disk"
+      "video"
+      "docker"
+    ];
     shell = pkgs.zsh;
     hashedPassword = "$y$j9T$Xop5RxMU4AyqJgL/tYq7o0$TQAA6O04WqaY3wCYrcR2GjpckbJqb0mRZDMsxOIEIJC";
     openssh.authorizedKeys.keyFiles = [ inputs.ssh-keys.outPath ];
@@ -66,12 +79,15 @@
 
   nix.settings = {
     # Enable the Flakes feature and the accompanying new nix command-line tool
-    experimental-features = [ "nix-command" "flakes" ];
-    
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+
     # given the users in this list the right to specify additional substituters via:
     #    1. `nixConfig.substituters` in `flake.nix`
     #    2. command line args `--options substituters http://xxx`
-    trusted-users = ["andrew"];
+    trusted-users = [ "andrew" ];
 
     substituters = [
       "https://cache.nixos.org"
@@ -100,7 +116,7 @@
     inetutils
     jq
     ncdu
-    neovim
+    #    neovim
     python3
     sl
     tealdeer

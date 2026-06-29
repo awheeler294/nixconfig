@@ -29,7 +29,7 @@
           "PATH=/run/current-system/sw/bin/:%h/bin" 
         ];
         ExecSearchPath = [ "%h/bin/" ];
-        ExecStart = "${pkgs.swayidle}/bin/swayidle -w timeout 300 '%h/bin/swaylock-swww -f 30 -g 31' timeout 390 'niri msg action power-off-monitors' timeout 600 'systemctl suspend' before-sleep '%h/bin/swaylock-swww -f 0 -g 0'";
+        ExecStart = "${pkgs.swayidle}/bin/swayidle -w timeout 300 '%h/bin/swaylock-awww -f 30 -g 31' timeout 390 'niri msg action power-off-monitors' timeout 600 'systemctl suspend' before-sleep '%h/bin/swaylock-awww -f 0 -g 0'";
         Restart = "on-failure";
       };
 

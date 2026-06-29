@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   home-manager.users = {
@@ -9,6 +14,7 @@
         ../home/niri.nix
         ../home/nvim.nix
         ../home/zsh.nix
+        # ../home/nvim-kickstart.nix
       ];
 
       home.shellAliases = {

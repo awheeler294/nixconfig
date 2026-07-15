@@ -38,11 +38,6 @@
     ];
 
     plugins = with pkgs.vimPlugins; [
-      # Airline
-      vim-airline
-      vim-airline-themes
-      vim-airline-clock
-
       # ASCII diagram editor
       venn-nvim
 

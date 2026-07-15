@@ -162,7 +162,6 @@
 
     ssh = "TERM=xterm-256color ssh";
 
-    vin = "NVIM_APPNAME=nvim-kickstart nvim";
     hh = "hstr";
 
     urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";

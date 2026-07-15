@@ -2,26 +2,33 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
-      ../modules/common-base.nix
-      ../modules/common-gui.nix
+    ../modules/common-base.nix
+    ../modules/common-gui.nix
 
-      ../modules/dev.nix
-    
-      ../modules/sway.nix
-      ../modules/niri.nix
+    ../modules/dev.nix
 
-      ../modules/kiduser.nix
-      
-      ../modules/steam.nix
-      ../modules/bluray.nix
-    ];
+    ../modules/sway.nix
+    ../modules/niri.nix
+    ../modules/nix-nvim-kickstart.nix
+
+    ../modules/kiduser.nix
+
+    ../modules/steam.nix
+    ../modules/bluray.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -30,7 +37,7 @@
       efi.canTouchEfiVariables = true;
     };
 
-    kernelPackages = pkgs.linuxPackages_latest; # recomended at least 6.15 for RX 9070
+    kernelPackages = pkgs.linuxPackages_latest; # recommended at least 6.15 for RX 9070
 
     kernelParams = [
       "zswap.enabled=1" # enables zswap
@@ -50,7 +57,10 @@
       themePackages = with pkgs; [
         # By default we would install all themes
         (adi1090x-plymouth-themes.override {
-          selected_themes = [ "abstract_ring" "rings" ];
+          selected_themes = [
+            "abstract_ring"
+            "rings"
+          ];
         })
       ];
     };
@@ -93,14 +103,19 @@
     "/".options = [ "compress=zstd" ];
     "/home".options = [ "compress=zstd" ];
     "/home/andrew/.steam".options = [ "compress=zstd" ];
-    "/nix".options = [ "compress=zstd" "noatime" ];
+    "/nix".options = [
+      "compress=zstd"
+      "noatime"
+    ];
     "/swap".options = [ "noatime" ];
   };
 
-  swapDevices = [{ 
-    device = "/swap/swapfile"; 
-    size = 8*1024; # Creates an 8GB swap file 
-  }];
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 8 * 1024; # Creates an 8GB swap file
+    }
+  ];
 
   services.btrfs.autoScrub = {
     enable = true;
@@ -112,11 +127,16 @@
   fileSystems."/mnt/vaulty-server" = {
     device = "//192.168.1.5/storage";
     fsType = "cifs";
-    options = let
-      # this line prevents hanging on network split
-      automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
+    options =
+      let
+        # this line prevents hanging on network split
+        automount_opts = "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s";
 
-    in ["${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=1001" "nofail"];
+      in
+      [
+        "${automount_opts},credentials=/etc/nixos/smb-secrets,uid=1000,gid=1001"
+        "nofail"
+      ];
   };
 
   # Configure keymap in X11
@@ -131,8 +151,8 @@
       cups-browsed
     ];
   };
-  
-  # Enable network printer discovery 
+
+  # Enable network printer discovery
   services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -164,7 +184,9 @@
   services.displayManager.autoLogin.enable = lib.mkForce false;
   services.displayManager.autoLogin.user = lib.mkForce "andrew";
   services.displayManager.defaultSession = lib.mkForce "niri";
+
   programs.firefox.enable = true;
+  programs.nix-ld.enable = true; # for .NET
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -172,11 +194,14 @@
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    cifs-utils #For mount.cifs, required unless domain name resolution is not needed.
+    cifs-utils # For mount.cifs, required unless domain name resolution is not needed.
     distrobox
     firefox
     git
+    hunspell # spellcheck for libreoffice
+    hunspellDicts.en-us # spellcheck for libreoffice
     lact
+    libreoffice
     librewolf
     nvtopPackages.amd
     podman
@@ -253,4 +278,3 @@
   system.stateVersion = "25.11"; # Did you read the comment?
 
 }
-

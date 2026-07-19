@@ -7,7 +7,7 @@
       imports = [
         ../home/andrew.nix
         ../home/common/gui.nix
-        ../home/nvim.nix
+        ../home/nix-nvim-kickstart.nix
         ../home/zsh.nix
       ];
 

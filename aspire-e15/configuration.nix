@@ -14,6 +14,9 @@
     
     ../modules/sway.nix
     ../modules/kiduser.nix
+
+    ../modules/niri.nix
+    ../modules/sway.nix
   ];
 
   # Bootloader.
@@ -66,7 +69,7 @@
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = lib.mkForce true;
   services.displayManager.autoLogin.user = lib.mkForce "andrew";
-  services.displayManager.defaultSession = lib.mkForce "sway";
+  services.displayManager.defaultSession = lib.mkForce "niri";
 
   services.samba.enable = true;
 

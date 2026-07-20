@@ -60,14 +60,13 @@
     jasper-gtk-theme
     mako # notification system developed by swaywm maintainer
     matcha-gtk-theme
-    mako 
     swayidle 
     swaylock 
-    swww
+    awww
     themechanger
-    xfce.thunar
-    xfce.thunar-volman
-    xfce.thunar-archive-plugin
+    thunar
+    thunar-volman
+    thunar-archive-plugin
     xdg-utils # for opening default programs when clicking links
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     wdisplays # tool to configure displays
@@ -78,17 +77,17 @@
 
   systemd.user.services = {
     
-    swww-daemon = {
+    awww-daemon = {
 
       unitConfig = {
-        Description = "swww daemon";
+        Description = "awww daemon";
         PartOf = "graphical-session.target";
         After = "graphical-session.target";
         Requires = "graphical-session.target";
       };
       
       serviceConfig = {
-        ExecStart = "${pkgs.swww}/bin/swww-daemon --no-cache";
+        ExecStart = "${pkgs.awww}/bin/awww-daemon --no-cache";
         Restart = "on-failure";
       };
 
@@ -96,9 +95,10 @@
   };
 
   systemd.user.targets.graphical-session.wants = [ 
-    "swww-daemon.service" 
-    "swayidle.service" 
+    "awww-daemon.service" 
     "waybar.service"
+    "niri-idle.service"
+    "niri-tile-to-n.service"
   ];
 
   users.users.andrew.extraGroups = [ "input" ];

@@ -1,15 +1,20 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
 
   imports = [
     ../zsh.nix
-    ../nvim.nix
+    #    ../nvim.nix
   ];
 
   xdg = {
     enable = true;
-    
+
     # starship
     configFile."starship.toml".source = ../../conf.d/starship/starship.toml;
   };
@@ -21,7 +26,7 @@
     bat
     helix
     micro-full
-    neofetch
+    fastfetch
     nnn # terminal file manager
 
     # archives
@@ -31,7 +36,7 @@
     p7zip
 
     # utils
-    caligula # cli disk image writer, like etcher 
+    caligula # cli disk image writer, like etcher
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
     jq # A lightweight and flexible command-line JSON processor
@@ -42,12 +47,12 @@
     # networking tools
     mtr # A network diagnostic tool
     iperf3
-    dnsutils  # `dig` + `nslookup`
+    dnsutils # `dig` + `nslookup`
     ldns # replacement of `dig`, it provide the command `drill`
     aria2 # A lightweight multi-protocol & multi-source command-line download utility
     socat # replacement of openbsd-netcat
     nmap # A utility for network discovery and security auditing
-    ipcalc  # it is a calculator for the IPv4/v6 addresses
+    ipcalc # it is a calculator for the IPv4/v6 addresses
 
     # misc
     cowsay
@@ -71,7 +76,7 @@
     hugo # static site generator
     glow # markdown previewer in terminal
 
-    btop  # replacement of htop/nmon
+    btop # replacement of htop/nmon
     iotop # io monitoring
     iftop # network monitoring
 
@@ -120,11 +125,13 @@
         select = "underline";
       };
     };
-    languages.language = [{
-      name = "nix";
-      auto-format = true;
-      formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
-    }];
+    languages.language = [
+      {
+        name = "nix";
+        auto-format = true;
+        formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
+      }
+    ];
     themes = {
       autumn_night_transparent = {
         "inherits" = "autumn_night";
@@ -144,22 +151,21 @@
   };
 
   home.shellAliases = {
-      ls = "eza --icons";
-      ll ="eza --icons -lhaag";
-      tree = "eza --icons --tree";
+    ls = "eza --icons";
+    ll = "eza --icons -lhaag";
+    tree = "eza --icons --tree";
 
-      cp = "cp -i";       # Confirm before overwriting something            
-      df = "df -h";       # Human-readable sizes
-      free = "free -m";   # Show sizes in MB
-      grep = "grep -i";   # Case insensitive
+    cp = "cp -i"; # Confirm before overwriting something
+    df = "df -h"; # Human-readable sizes
+    free = "free -m"; # Show sizes in MB
+    grep = "grep -i"; # Case insensitive
 
-      ssh = "TERM=xterm-256color ssh";
+    ssh = "TERM=xterm-256color ssh";
 
-      vin = "NVIM_APPNAME=nvim-kickstart nvim";
-      hh = "hstr";
+    hh = "hstr";
 
-      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+    urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
+    urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
   };
 
 }

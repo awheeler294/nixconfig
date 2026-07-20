@@ -20,10 +20,17 @@
 @define-color pear            #C2E812;
 @define-color fuchsia-rose    #C94277;
 @define-color columbia-blue   #B8D0EB;
+/* #B8D0EB #728CB0 #54617D */
 @define-color sunglow         #FDCA40;
 @define-color poppy           #DF2935;
 
+@define-color bg-alpha rgba(40, 48, 68, 0.98);
+@define-color bg-alt-alpha rgba(57, 57, 58, 0.98);
 @define-color background-alpha rgba(38, 38, 38, 0.98);
+
+@define-color primary-gra-1 rgba(184, 208, 235, 1);
+@define-color primary-gra-2 rgba(180, 204, 233, 1);
+@define-color primary-gra-3 rgba(114, 140, 176, 1);
 
 * {
    /* `otf-font-awesome` is required to be installed for icons */
@@ -33,6 +40,7 @@
 
 window#waybar {
    background-color: @background-alpha;
+   background: linear-gradient(337deg,  @bg-alpha 0%,  @bg-alt-alpha 20%, @background-alpha 100%);
    color: @fg;
    font-weight: bold;
    transition-property: background-color;
@@ -92,8 +100,7 @@ button:hover {
 #clock {
    padding: 0 1em 0 1em;
    background: @primary;
-   /* background: #B8D0EB; */
-   /* background: linear-gradient(127deg, rgba(184, 208, 235, 1) 50%, rgba(122, 166, 218, 1) 85%); */
+   background: radial-gradient(ellipse at 55% 55%, @primary-gra-1 0%, @primary-gra-2 65%, @primary-gra-3 100%);
    color: @bg;
    border-radius: 1em .2em 1.8em 1em;
 }
@@ -107,6 +114,7 @@ button:hover {
    padding: 0 1em 0 1em;
    margin: 0 5px 0 0;
    background: @primary;
+   background: radial-gradient(ellipse at 55% 55%, @primary-gra-1 0%, @primary-gra-2 65%, @primary-gra-3 100%);
    /* background: #7AA6DA; */
    /* background: linear-gradient(127deg, rgba(122, 166, 218, 1) 15%, rgba(184, 208, 235, 1) 50%); */
    color: @bg;
@@ -117,6 +125,7 @@ button:hover {
    padding: 0 0 0 1em;
    margin: 0 0 0 0;
    background: @primary;
+   background: radial-gradient(ellipse at 45% 55%, @primary-gra-1 0%, @primary-gra-2 65%, @primary-gra-3 100%);
    /* background: #7AA6DA; */
    /* background: linear-gradient(127deg, rgba(122, 166, 218, 1) 15%, rgba(184, 208, 235, 1) 50%); */
    color: @bg;
@@ -127,6 +136,7 @@ button:hover {
    padding: 0 1em 0 0;
    margin: 0 5px 0 0;
    background: @primary;
+   background: radial-gradient(ellipse at 55%, @primary-gra-1 0%, @primary-gra-2 65%, @primary-gra-3 100%);
    color: @bg;
    border-radius: 0 1em 1em 0;
 }

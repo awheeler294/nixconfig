@@ -328,16 +328,20 @@ animations {
     // slowdown 3.0
 }
 
-workspace "chat" {
-    open-on-output "LG Electronics LG ULTRAGEAR 0x0000B107"
+workspace "vivaldi" {
+    open-on-output "PNP(ICB) DP Unknown"
 }
 
-workspace "browser" {
-    open-on-output "PNP(ICB) DP Unknown"
+workspace "firefox" {
+    open-on-output "LG Electronics LG ULTRAWIDE 0x0004C1A8"
 }
 
 workspace "steam" {
     open-on-output "PNP(ICB) DP Unknown"
+}
+
+workspace "chat" {
+    open-on-output "LG Electronics LG ULTRAGEAR 0x0000B107"
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -367,7 +371,7 @@ window-rule {
 }
 
 window-rule {
-    open-maximized true
+    open-maximized false
 }
 
 window-rule {
@@ -420,14 +424,24 @@ window-rule {
 
 window-rule {
     match app-id="discord" title="Discord"
-    default-column-width { proportion 0.4; }
+    default-column-width { proportion 0.8; }
     open-on-workspace "chat"
 }
 
 window-rule {
     match app-id="Signal" title="Signal"
-    default-column-width { proportion 0.4; }
+    default-column-width { proportion 0.8; }
     open-on-workspace "chat"
+}
+
+window-rule {
+    match app-id="vivaldi-stable" title=r#"^*vivaldi*$"# at-startup=true
+    open-on-workspace "vivaldi"
+}
+
+window-rule {
+    match app-id="firefox" title=r#"^*Mozilla Firefox*$"# at-startup=true
+    open-on-workspace "firefox"
 }
 
 binds {
@@ -453,10 +467,17 @@ binds {
     Mod+F1 { spawn "steam"; }
     Mod+F2 { spawn "vivaldi" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"; }
     Mod+F3 { spawn "thunar"; }
+    Mod+F4 { spawn "bash" "-c" "
+      niri msg action spawn -- vivaldi --enable-features=UseOzonePlatform --ozone-platform=wayland; \\
+      niri msg action spawn -- firefox; \\
+      niri msg action spawn -- steam; \\
+      niri msg action spawn -- discord; \\
+      niri msg action spawn -- org.signal.Signal
+    "; }
     Mod+Ctrl+M { spawn "pavucontrol"; }
-    Super+Shift+L { spawn "/home/andrew/bin/swaylock-swww" "-g" "0" "-f" "0"; }
+    Super+Shift+L { spawn "/home/andrew/bin/swaylock-awww" "-g" "0" "-f" "0"; }
     Mod+Return { spawn "alacritty"; }
-    Mod+P { spawn "systemctl" "--user" "start" "swww-random"; }
+    Mod+P { spawn "systemctl" "--user" "start" "awww-random"; }
     Mod+Ctrl+W { spawn "bash" "-c" "notify-send \"$(niri msg focused-window)\""; }
 
     // You can also use a shell:

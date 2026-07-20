@@ -52,7 +52,7 @@ do
    # echo "7: ${line[7]}"
    # echo "8: ${line[8]}"
    # echo "9: ${line[9]}"
-done < <(swww query)
+done < <(awww query)
 
 # echo "$image_args"
 

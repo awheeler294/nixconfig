@@ -18,7 +18,7 @@ case $command in
    
    2)
       echo "locking"
-      swaylock-swww -g 0 -f 0
+      swaylock-awww -g 0 -f 0
       echo "resuming"
       ;;
    

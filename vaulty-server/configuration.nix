@@ -15,6 +15,8 @@
     
     ../modules/sway.nix
     ../modules/niri.nix
+
+    ../modules/nix-nvim-kickstart.nix
   ];
 
   # Bootloader.

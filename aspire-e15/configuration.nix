@@ -16,6 +16,7 @@
     ../modules/kiduser.nix
 
     ../modules/niri.nix
+    ../modules/nix-nvim-kickstart.nix
     ../modules/sway.nix
   ];
 
